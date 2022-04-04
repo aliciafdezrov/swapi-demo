@@ -1,0 +1,43 @@
+@import "../../_variables";
+
+.main {
+  padding-bottom: 30px;
+}
+
+.search-bar {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 25px;
+
+  @media (min-width: 360px) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  @media (max-width: 360px) {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+.logout-button {
+  font-size: 1.2rem;
+  background-color: $main;
+  padding: 13px 10px;
+  color: white;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 25px rgba(3, 252, 0, 0.5);
+
+  &:active {
+    transform: scale(0.99);
+    background-color: darken($main, 5%);
+    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.2);
+  }
+
+  &:focus {
+    outline: 3px solid orange;
+  }
+}

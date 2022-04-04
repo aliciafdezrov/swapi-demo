@@ -1,0 +1,42 @@
+@import "../../../../_variables";
+
+.grid-container {
+  @media (min-width: 360px) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  @media (max-width: 360px) {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  column-gap: 20px;
+  row-gap: 20px;
+  align-items: start;
+  margin-bottom: 5rem;
+}
+
+main .section .subtitle {
+  color: #b3b3b3;
+  font-size: 1rem;
+  margin-top: -8px;
+  font-weight: 100;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    @media (min-width: 360px) {
+      padding-left: 50px;
+    }
+    @media (max-width: 360px) {
+      padding-left: 25px;
+    }
+    text-transform: uppercase;
+  }
+}
