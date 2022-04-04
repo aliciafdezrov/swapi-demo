@@ -1,0 +1,44 @@
+@import "../../../variables";
+
+.not-found-container {
+  margin-top: 20vh;
+
+  .back-index {
+    padding-top: 50px;
+    text-align: center;
+    font-size: 1.5rem;
+
+    a {
+      color: inherit;
+
+      &:focus {
+        outline: $main;
+        background: $main;
+      }
+    }
+  }
+
+  .not-found-text {
+    color: $main;
+    text-shadow: 0 0 6px $main,
+    0 0 30px $main,
+    0 0 12px $main,
+    0 0 21px $main,
+    0 0 38px $main,
+    0 0 60px $main;
+  }
+
+
+  h1, h2 {
+    text-align: center;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
