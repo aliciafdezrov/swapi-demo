@@ -1,6 +1,6 @@
 import React from "react";
-import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
-import {PlanetsScene, StarshipsScene} from "../scenes";
+import {HashRouter as Router, Navigate, Route, Routes} from "react-router-dom";
+import {PlanetsScene, StarshipsScene} from "scenes";
 import {switchRoutes} from "./routes";
 
 export const RouterComponent = () => {

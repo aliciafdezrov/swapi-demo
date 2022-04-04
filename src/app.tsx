@@ -1,5 +1,5 @@
 import React from "react";
-import {RouterComponent} from "./router";
+import {RouterComponent} from "core";
 
 export const App = () => {
     return (
