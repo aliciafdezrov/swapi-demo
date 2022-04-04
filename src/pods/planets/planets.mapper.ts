@@ -18,7 +18,15 @@ export const mapPlanetsFromApiToVm = (planets: apiModel.Planets): viewModel.Plan
     const planetsInfo = createDefaultPlanets();
     planetsInfo.planets = mapPlanetListFromApiToVm(planets.results);
     planetsInfo.count = planets.count;
-    planetsInfo.next = planets.next;
-    planetsInfo.previous = planets.previous;
+    planetsInfo.hasNextPage = Boolean(planets.next);
+    planetsInfo.hasPreviousPage = Boolean(planets.previous);
+
+    if (!planetsInfo.hasPreviousPage) {
+        planetsInfo.currentPage = 1;
+    } else {
+        const url = new URL(planets.previous);
+        const previousPage: string = url.searchParams.get("page");
+        planetsInfo.currentPage = Number(previousPage) + 1;
+    }
     return planetsInfo;
 }

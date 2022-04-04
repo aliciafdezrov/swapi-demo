@@ -2,11 +2,11 @@ import {Planets} from "./planet.api-model";
 
 const baseUrl = "https://swapi.dev/api/planets/"
 
-export const getPlanets = async (name: string): Promise<Planets> => {
+export const getPlanets = async (search: string, page: number = 1): Promise<Planets> => {
     try {
-        let url = baseUrl;
-        if (name) {
-            url += `?name=${name}`
+        let url = `${baseUrl}?page=${page}`;
+        if (search) {
+            url += `&search=${search}`;
         }
         const response = await fetch(url, {
             method: 'GET',

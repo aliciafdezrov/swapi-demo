@@ -34,14 +34,16 @@ export const createEmptyPlanet = (): Planet => ({
 
 export interface Planets {
     count: number;
-    next: string | null;
-    previous: string | null;
     planets: Planet[];
+    currentPage: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
 }
 
 export const createDefaultPlanets = (): Planets => ({
     count: 0,
-    next: null,
-    previous: null,
+    currentPage: 0,
+    hasNextPage: false,
+    hasPreviousPage: false,
     planets: []
 });

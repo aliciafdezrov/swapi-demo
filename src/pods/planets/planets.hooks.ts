@@ -2,33 +2,33 @@ import React from 'react';
 import * as api from './api';
 import {debounce} from "lodash";
 import {useNavigate, useLocation} from "react-router-dom";
-import {Planet} from "./planets.vm";
-import {mapPlanetListFromApiToVm} from "./planets.mapper";
+import {createDefaultPlanets, Planets} from "./planets.vm";
+import {mapPlanetsFromApiToVm} from "./planets.mapper";
 import {switchRoutes} from "core";
 
 interface Props {
-    onLoadPlanets: (vmPlanets: Planet[]) => void;
+    onLoadPlanets: (vmPlanets: Planets) => void;
 }
 
 export const useSearch = (props: Props) => {
     const navigate = useNavigate();
 
-    const debouncedSearch = debounce(async (name: string) => {
-        await handleSearch(name);
+    const debouncedSearch = debounce(async (name: string, page?: number) => {
+        await onSearch(name, page);
     }, 500);
 
-    const handleSearch = React.useCallback(async (name: string) => {
+    const onSearch = React.useCallback(async (name: string, page?: number) => {
         try {
-            let vmPlanets: Planet[] = [];
+            let vmPlanets: Planets = createDefaultPlanets();
             let locationDescriptor: any = {
                 pathname: switchRoutes.planets,
-            }
+            };
 
             const encodedQuery: string = encodeURIComponent(name);
-            const apiPlanets = await api.getPlanets(encodedQuery);
-            vmPlanets = mapPlanetListFromApiToVm(apiPlanets);
-            if (name) {
-                locationDescriptor.search = `?search=${encodedQuery}`;
+            const apiPlanets = await api.getPlanets(encodedQuery, page);
+            vmPlanets = mapPlanetsFromApiToVm(apiPlanets);
+            if (name || page) {
+                locationDescriptor.search = `?name=${encodedQuery}&page=${page}`;
                 navigate(locationDescriptor);
             }
             props.onLoadPlanets(vmPlanets);
@@ -37,8 +37,15 @@ export const useSearch = (props: Props) => {
         }
     }, []);
 
+    const handleOnSearch = (name: string, page?: number) => {
+        if (name) {
+            return debouncedSearch(name, page);
+        }
+        return onSearch(name, page);
+    }
+
     return {
-        onSearch: debouncedSearch,
+        onSearch: handleOnSearch,
     };
 };
 

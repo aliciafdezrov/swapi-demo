@@ -1,21 +1,25 @@
 import React from 'react';
 import {useSearch, useSearchQueryParams} from './planets.hooks';
-import {Planet} from "./planets.vm";
+import {createDefaultPlanets, Planets} from "./planets.vm";
 import {PlanetsComponent} from "./planets.component";
 
 export const PlanetsContainer: React.FC = () => {
-    const [planets, setPlanets] = React.useState<Planet[]>([]);
+    const [planetsInfo, setPlanetsInfo] = React.useState<Planets>(createDefaultPlanets());
     const {getQueryParam} = useSearchQueryParams();
     const {onSearch} = useSearch({
-        onLoadPlanets: (vmPlanets) => setPlanets(vmPlanets),
+        onLoadPlanets: (vmPlanets) => setPlanetsInfo(vmPlanets),
     });
 
     React.useEffect(() => {
-        let searchQuery = getQueryParam("name");
-        onSearch(searchQuery);
+        let nameQuery = getQueryParam("name");
+        let page;
+        if (getQueryParam("page")) {
+            page = Number(getQueryParam("page"));
+        }
+        onSearch(nameQuery, page);
     }, []);
 
     return (
-        <PlanetsComponent planets={planets} onSearch={onSearch}/>
+        <PlanetsComponent planetsInfo={planetsInfo} onSearch={onSearch} name={getQueryParam("name")}/>
     );
 };

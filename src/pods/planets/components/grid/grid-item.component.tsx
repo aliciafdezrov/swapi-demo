@@ -13,7 +13,7 @@ export const GridItem: React.FC<Props> = (props) => {
 
     return (
         <div className={`${classes.card} ${classes.fadeInCard}`}>
-            <img src={item.url}
+            <img src={`../../../../../assets/planets/${item.name.toLowerCase()}.jpg`}
                  alt={item.name}
                  onError={(e: any) => {
                      e.target.onerror = null;
