@@ -1,7 +1,10 @@
 import React from 'react';
+import {MainLayout} from "../layouts/main.layout";
 
 export const StarshipsScene: React.FC = () => {
     return (
-        <h1>Hello from starships scene!</h1>
+        <MainLayout>
+            <h1>Hello from starships scene!</h1>
+        </MainLayout>
     );
 };

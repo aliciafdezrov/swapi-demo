@@ -8,6 +8,9 @@ module.exports = merge(common, {
     devServer: {
         port: 8080,
     },
+    optimization: {
+        runtimeChunk: 'single'
+    },
     output: {
         filename: "[name].js",
     },
