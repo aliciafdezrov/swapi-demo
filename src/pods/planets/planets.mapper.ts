@@ -10,9 +10,9 @@ export const mapPlanetFromApiToVm = (
 };
 
 export const mapPlanetListFromApiToVm = (
-    projectSummary: apiModel.Planet[]
+    planets: apiModel.Planet[]
 ): viewModel.Planet[] =>
-    mapToCollection(projectSummary, p => mapPlanetFromApiToVm(p));
+    mapToCollection(planets, p => mapPlanetFromApiToVm(p));
 
 export const mapPlanetsFromApiToVm = (planets: apiModel.Planets): viewModel.Planets => {
     const planetsInfo = createDefaultPlanets();

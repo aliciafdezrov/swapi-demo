@@ -1,0 +1,80 @@
+@import "../../../../_variables";
+
+.fade-in-card {
+  animation: fadeIn 0.3s;
+  -webkit-animation: fadeIn 0.3s;
+  -moz-animation: fadeIn 0.3s;
+  -o-animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  height: 410px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  background: $secondary;
+  border-radius: 10px;
+
+  img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .container {
+    margin: 20px;
+    height: 21px;
+    width: 282px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    label {
+      height: 21px;
+      width: 282px;
+    }
+  }
+
+
+  &:hover {
+    background: fade-out($secondary, 0.5%);
+  }
+}

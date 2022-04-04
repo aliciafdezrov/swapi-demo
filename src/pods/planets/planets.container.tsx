@@ -20,6 +20,6 @@ export const PlanetsContainer: React.FC = () => {
     }, []);
 
     return (
-        <PlanetsComponent planetsInfo={planetsInfo} onSearch={onSearch} name={getQueryParam("name")}/>
+        <PlanetsComponent starshipsInfo={planetsInfo} onSearch={onSearch} search={getQueryParam("name")}/>
     );
 };

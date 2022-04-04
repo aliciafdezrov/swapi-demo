@@ -1,16 +1,16 @@
 import React from 'react';
 import {Grid} from "./components/grid/grid.component";
 import {SearchBar} from "./components/search-bar/search-bar.component";
-import classes from './planets.style.scss';
-import {Planets} from "./planets.vm";
+import classes from './starships.style.scss';
+import {Starships} from "./starships.vm";
 
 interface Props {
-    starshipsInfo: Planets;
+    starshipsInfo: Starships;
     search: string;
     onSearch: (name: string, page?: number) => void;
 }
 
-export const PlanetsComponent = (props: Props) => {
+export const StarshipsComponent = (props: Props) => {
     const {starshipsInfo, onSearch, search} = props;
 
     const handleOnSearch = (name: string) => {
@@ -18,10 +18,10 @@ export const PlanetsComponent = (props: Props) => {
     }
 
     const getFooterTextContent = () => {
-        const planetsLength = starshipsInfo.planets.length;
+        const planetsLength = starshipsInfo.starships.length;
         let startIndex = planetsLength * starshipsInfo.currentPage - planetsLength
         if (starshipsInfo.currentPage === 0) startIndex = 0;
-        let endIndex = starshipsInfo.planets.length * starshipsInfo.currentPage;
+        let endIndex = starshipsInfo.starships.length * starshipsInfo.currentPage;
 
         return `${startIndex} to ${endIndex} of ${starshipsInfo.count} planets`;
     }
@@ -33,7 +33,7 @@ export const PlanetsComponent = (props: Props) => {
             </header>
 
             <main className={classes.main}>
-                <Grid planets={starshipsInfo.planets}/>
+                <Grid starships={starshipsInfo.starships}/>
             </main>
 
             <footer>

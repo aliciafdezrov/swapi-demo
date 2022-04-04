@@ -1,11 +1,11 @@
 import React from 'react';
 import classes from "./grid-item.style.scss";
-import {Planet} from "../../planets.vm";
+import {Starship} from "../../starships.vm";
 
 const defaultItemImage = require("../../../../../assets/default.jpg");
 
 interface Props {
-    item: Planet;
+    item: Starship;
 }
 
 export const GridItem = (props: Props) => {
