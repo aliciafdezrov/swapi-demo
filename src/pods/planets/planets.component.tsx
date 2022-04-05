@@ -1,17 +1,25 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import classes from './planets.style.scss';
-import {Planets} from "./planets.vm";
+import {Planets, PlanetVm} from "./planets.vm";
 import {mapPlanetVmListToCardVmList} from "./planets.mapper";
-import {SearchBar, CardArray} from "common";
+import {SearchBar, CardArray, sortDTOListByProp} from "common";
+import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
 
 interface Props {
-    starshipsInfo: Planets;
+    planetsInfo: Planets;
     search: string;
     onSearch: (name: string, page?: number) => void;
 }
 
+const buildPlanetsSortOptions = (): SelectItem[] => ([
+    {
+        name: "Name",
+        value: "name"
+    },
+]);
+
 export const PlanetsComponent = (props: Props) => {
-    const {starshipsInfo, onSearch, search} = props;
+    const {planetsInfo, onSearch, search} = props;
     const [sortBy, setSortBy] = useState<string>();
 
     const handleOnSearch = (name: string) => {
@@ -19,17 +27,19 @@ export const PlanetsComponent = (props: Props) => {
     }
 
     const getFooterTextContent = () => {
-        const planetsLength = starshipsInfo.planets.length;
-        let startIndex = planetsLength * starshipsInfo.currentPage - planetsLength
-        if (starshipsInfo.currentPage === 0) startIndex = 0;
-        let endIndex = starshipsInfo.planets.length * starshipsInfo.currentPage;
+        const planetsLength = planetsInfo.planets.length;
+        let startIndex = planetsLength * planetsInfo.currentPage - planetsLength
+        if (planetsInfo.currentPage === 0) startIndex = 0;
+        let endIndex = planetsInfo.planets.length * planetsInfo.currentPage;
 
-        return `${startIndex} to ${endIndex} of ${starshipsInfo.count} planets`;
+        return `${startIndex} to ${endIndex} of ${planetsInfo.count} planets`;
     }
 
-    const handleOnSort = (sortBy: string) => {
-        console.log(sortBy);
-    }
+    const sortFunction = useCallback((planets: PlanetVm[], isAsc: boolean): PlanetVm[] => {
+        if (!sortBy) return planets;
+        return sortDTOListByProp(sortBy, 'string')(planets, isAsc);
+    }, [sortBy]);
+    const sortedPlanets: PlanetVm[] = sortFunction(planetsInfo.planets, true);
 
     return (
         <>
@@ -40,17 +50,17 @@ export const PlanetsComponent = (props: Props) => {
             </header>
 
             <main className={classes.main}>
-                <SearchBar onSearch={handleOnSearch} search={""} onSelect={handleOnSort} selectValue={sortBy}
-                           selectOptions={[{name: 'None', value: 'none'}]}/>
-                <CardArray cards={mapPlanetVmListToCardVmList(starshipsInfo.planets)}/>
+                <SearchBar onSearch={handleOnSearch} search={""} onSelect={setSortBy} selectValue={sortBy}
+                           selectOptions={buildPlanetsSortOptions()}/>
+                <CardArray cards={mapPlanetVmListToCardVmList(sortedPlanets)}/>
             </main>
 
-            <button disabled={!starshipsInfo.hasPreviousPage}
-                    onClick={() => onSearch(search, starshipsInfo.currentPage - 1)}>prev
+            <button disabled={!planetsInfo.hasPreviousPage}
+                    onClick={() => onSearch(search, planetsInfo.currentPage - 1)}>prev
             </button>
             <span>{getFooterTextContent()}</span>
-            <button disabled={!starshipsInfo.hasNextPage}
-                    onClick={() => onSearch(search, starshipsInfo.currentPage + 1)}>next
+            <button disabled={!planetsInfo.hasNextPage}
+                    onClick={() => onSearch(search, planetsInfo.currentPage + 1)}>next
             </button>
         </>
     );

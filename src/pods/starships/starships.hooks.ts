@@ -21,7 +21,7 @@ export const useSearch = (props: Props) => {
         try {
             let vmStarships: Starships = createDefaultStarships();
             let locationDescriptor: any = {
-                pathname: switchRoutes.planets,
+                pathname: switchRoutes.starships,
             };
 
             const encodedQuery: string = encodeURIComponent(name);

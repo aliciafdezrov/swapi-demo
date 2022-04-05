@@ -3,14 +3,16 @@ export interface Starship {
     model: string;
     starship_class: string;
     manufacturer: string;
-    cost_in_credits: string;
+    costInCredits: string;
     length: string;
     crew: string;
+    crewAbsoluteValue: string | number;
     passengers: string;
-    max_atmosphering_speed: string;
-    hyperdrive_rating: string;
+    maxAtmospheringSpeed: string;
+    hyperdriveRating: string;
     MGLT: string;
-    cargo_capacity: string;
+    cargoCapacity: string;
+    cargoCapacityAbsoluteValue: string | number;
     consumables: string;
     films: string;
     pilots: string;
@@ -24,14 +26,16 @@ export const createEmptyStarship = (): Starship => ({
     model: "",
     starship_class: "",
     manufacturer: "",
-    cost_in_credits: "",
+    costInCredits: "",
     length: "",
     crew: "",
+    crewAbsoluteValue: "",
     passengers: "",
-    max_atmosphering_speed: "",
-    hyperdrive_rating: "",
+    maxAtmospheringSpeed: "",
+    hyperdriveRating: "",
     MGLT: "",
-    cargo_capacity: "",
+    cargoCapacity: "",
+    cargoCapacityAbsoluteValue: "",
     consumables: "",
     films: "",
     pilots: "",

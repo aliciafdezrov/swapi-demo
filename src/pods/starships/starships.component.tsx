@@ -1,14 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useMemo} from 'react';
 import classes from './starships.style.scss';
-import {Starships} from "./starships.vm";
-import {CardArray, SearchBar} from "common";
+import {Starship, Starships} from "./starships.vm";
+import {CardArray, SearchBar, sortDTOListByProp} from "common";
 import {mapStarshipVmListToCardVmList} from "./starships.mapper";
+import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
 
 interface Props {
     starshipsInfo: Starships;
     search: string;
     onSearch: (name: string, page?: number) => void;
 }
+
+const buildStarshipSortOptions = (): SelectItem[] => ([
+    {
+        name: "Cargo capacity",
+        value: "cargoCapacityAbsoluteValue"
+    },
+    {
+        name: "Crew",
+        value: "crewAbsoluteValue"
+    },
+]);
 
 export const StarshipsComponent = (props: Props) => {
     const {starshipsInfo, onSearch, search} = props;
@@ -27,9 +39,19 @@ export const StarshipsComponent = (props: Props) => {
         return `${startIndex} to ${endIndex} of ${starshipsInfo.count} starships`;
     }
 
-    const handleOnSort = (sortBy: string) => {
-        console.log(sortBy);
-    }
+    const sortFunction = useCallback((starships: Starship[], isAsc: boolean): Starship[] => {
+        if (!sortBy) return starships;
+
+        const definedStarships = starships.filter(s => !isNaN(s[sortBy]));
+        const nonDefinedStarchips = starships.filter(s => isNaN(s[sortBy]));
+        const sortedStarships = sortDTOListByProp(sortBy, 'number')(definedStarships, isAsc);
+        if (isAsc) {
+            return [...nonDefinedStarchips, ...sortedStarships]
+        }
+
+        return [...sortedStarships, ...nonDefinedStarchips];
+    }, [sortBy]);
+    const sortedStarships: Starship[] = sortFunction(starshipsInfo.starships, true);
 
     return (
         <>
@@ -40,9 +62,9 @@ export const StarshipsComponent = (props: Props) => {
             </header>
 
             <main className={classes.main}>
-                <SearchBar onSearch={handleOnSearch} search={""} onSelect={handleOnSort} selectValue={sortBy}
-                           selectOptions={[{name: 'None', value: 'none'}]}/>
-                <CardArray cards={mapStarshipVmListToCardVmList(starshipsInfo.starships)}/>
+                <SearchBar onSearch={handleOnSearch} search={""} onSelect={setSortBy} selectValue={sortBy}
+                           selectOptions={buildStarshipSortOptions()}/>
+                <CardArray cards={mapStarshipVmListToCardVmList(sortedStarships)}/>
             </main>
 
             <footer>
