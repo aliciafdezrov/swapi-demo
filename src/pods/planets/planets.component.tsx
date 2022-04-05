@@ -37,7 +37,7 @@ export const PlanetsComponent = (props: Props) => {
 
     const sortFunction = useCallback((planets: PlanetVm[], isAsc: boolean): PlanetVm[] => {
         if (!sortBy) return planets;
-        return sortDTOListByProp(sortBy, 'string')(planets, isAsc);
+        return sortDTOListByProp(planets, sortBy, 'string', isAsc);
     }, [sortBy]);
     const sortedPlanets: PlanetVm[] = sortFunction(planetsInfo.planets, true);
 

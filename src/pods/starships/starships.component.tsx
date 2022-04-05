@@ -44,7 +44,7 @@ export const StarshipsComponent = (props: Props) => {
 
         const definedStarships = starships.filter(s => !isNaN(s[sortBy]));
         const nonDefinedStarchips = starships.filter(s => isNaN(s[sortBy]));
-        const sortedStarships = sortDTOListByProp(sortBy, 'number')(definedStarships, isAsc);
+        const sortedStarships = sortDTOListByProp(definedStarships, sortBy, 'number', isAsc);
         if (isAsc) {
             return [...nonDefinedStarchips, ...sortedStarships]
         }

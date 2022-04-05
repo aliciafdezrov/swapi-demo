@@ -35,17 +35,15 @@ function compareString(a: string, b: string, isAscendingSort: boolean): number {
 }
 
 
-export const sortDTOListByProp = function (sortFilter: string, comparationType: 'string' | 'number') {
-    return function <T>(dataList: Array<T>, isAscendingSort: boolean = true): Array<T> {
-        return dataList.sort(function (a, b) {
-            const itemA = a[sortFilter];
-            const itemB = b[sortFilter];
+export function sortDTOListByProp<T>(dataList: Array<T>, sortFilter: string, comparationType: 'string' | 'number', isAscendingSort: boolean = true): Array<T> {
+    return dataList.sort(function (a, b) {
+        const itemA = a[sortFilter];
+        const itemB = b[sortFilter];
 
-            if (comparationType === 'string') {
-                return compareString(itemA, itemB, isAscendingSort);
-            }
+        if (comparationType === 'string') {
+            return compareString(itemA, itemB, isAscendingSort);
+        }
 
-            return compareNumbers(itemA, itemB, isAscendingSort);
-        });
-    }
+        return compareNumbers(itemA, itemB, isAscendingSort);
+    });
 }
