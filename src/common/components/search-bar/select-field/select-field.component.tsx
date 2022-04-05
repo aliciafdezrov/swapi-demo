@@ -10,6 +10,8 @@ interface Props {
     options: SelectItem[];
     value: string;
     onSelect: (value: string) => void;
+    isAscending?: boolean;
+    onChangeSortDirection: (isAscending: boolean) => void;
 }
 
 const empty_option: SelectItem = {
@@ -18,7 +20,7 @@ const empty_option: SelectItem = {
 }
 
 export const SelectField = (props: Props) => {
-    const {options, value, onSelect} = props;
+    const {options, value, onSelect, isAscending, onChangeSortDirection} = props;
 
     const handleOnSelect = (event) => {
         let selectedValue = event.target.value;
@@ -39,6 +41,14 @@ export const SelectField = (props: Props) => {
                     }
                 </>
             </select>
+            {value !== undefined && value !== empty_option.name ?
+                isAscending ?
+                    <span onClick={() => onChangeSortDirection(!isAscending)} className={classes.arrow}>&#x25BC;</span>
+                    :
+                    <span onClick={() => onChangeSortDirection(!isAscending)}
+                          className={classes.arrow}>&#x25B2;</span>
+                : null
+            }
         </section>
     );
 };

@@ -23,6 +23,7 @@ const buildPlanetsSortOptions = (): SelectItem[] => ([
 export const PlanetsComponent = (props: Props) => {
     const {planetsInfo, onSearch, search, loading} = props;
     const [sortBy, setSortBy] = useState<string>();
+    const [isSortAscending, setIsSortAscending] = useState<boolean>(true);
 
     const handleOnSearch = (name: string) => {
         onSearch(name, 1);
@@ -37,11 +38,11 @@ export const PlanetsComponent = (props: Props) => {
         return `${startIndex} to ${endIndex} of ${planetsInfo.count} planets`;
     }
 
-    const sortFunction = useCallback((planets: PlanetVm[], isAsc: boolean): PlanetVm[] => {
+    const sortFunction = useCallback((planets: PlanetVm[]): PlanetVm[] => {
         if (!sortBy) return planets;
-        return sortDTOListByProp(planets, sortBy, 'string', isAsc);
-    }, [sortBy]);
-    const sortedPlanets: PlanetVm[] = sortFunction(planetsInfo.planets, true);
+        return sortDTOListByProp(planets, sortBy, 'string', isSortAscending);
+    }, [sortBy, isSortAscending]);
+    const sortedPlanets: PlanetVm[] = sortFunction(planetsInfo.planets);
 
     return (
         <>
@@ -53,7 +54,8 @@ export const PlanetsComponent = (props: Props) => {
 
             <main className={classes.main}>
                 <SearchBar onSearch={handleOnSearch} search={search} onSelect={setSortBy} selectValue={sortBy}
-                           selectOptions={buildPlanetsSortOptions()}/>
+                           selectOptions={buildPlanetsSortOptions()} isAscending={isSortAscending}
+                           onChangeSortDirection={setIsSortAscending}/>
                 {!loading ? <CardArray cards={mapPlanetVmListToCardVmList(sortedPlanets)}/> : null}
             </main>
             <Loader isShown={loading}/>

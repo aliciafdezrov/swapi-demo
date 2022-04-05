@@ -19,9 +19,18 @@ export const Card = (props: Props) => {
                  }}
             />
             <div className={classes.container}>
-                <h6>{cardVm.mainLabel}</h6>
-                <h6>{cardVm.secondaryLabel}</h6>
-                <h6>{cardVm.detailLabel}</h6>
+              <div style={{paddingTop: '10px'}}>
+                <label className={classes.mainLabel}>{cardVm.mainLabel}</label>
+              </div>
+
+              <div style={{paddingTop: '10px'}}>
+                <label className={classes.secondaryLabel}>{cardVm.secondaryLabel}</label>
+              </div>
+
+              <div style={{paddingTop: '10px'}}>
+                <label className={classes.detailLabel}>Population of {cardVm.detailLabel}</label>
+              </div>
+
             </div>
         </div>
     );

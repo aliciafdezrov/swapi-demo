@@ -7,7 +7,11 @@
  */
 
 function compareNumbers(a: number, b: number, isAscendingSort: boolean): number {
-    return a - b;
+    if (isAscendingSort) {
+        return a - b;
+    }
+
+    return b - a;
 }
 
 /**

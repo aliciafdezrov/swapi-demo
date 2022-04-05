@@ -27,6 +27,7 @@ const buildStarshipSortOptions = (): SelectItem[] => ([
 export const StarshipsComponent = (props: Props) => {
     const {starshipsInfo, onSearch, search, loading} = props;
     const [sortBy, setSortBy] = useState<string>();
+    const [isSortAscending, setIsSortAscending] = useState<boolean>(true);
 
     const handleOnSearch = (name: string) => {
         onSearch(name, 1);
@@ -41,19 +42,18 @@ export const StarshipsComponent = (props: Props) => {
         return `${startIndex} to ${endIndex} of ${starshipsInfo.count} starships`;
     }
 
-    const sortFunction = useCallback((starships: Starship[], isAsc: boolean): Starship[] => {
+    const sortFunction = useCallback((starships: Starship[]): Starship[] => {
         if (!sortBy) return starships;
-
         const definedStarships = starships.filter(s => !isNaN(s[sortBy]));
         const nonDefinedStarchips = starships.filter(s => isNaN(s[sortBy]));
-        const sortedStarships = sortDTOListByProp(definedStarships, sortBy, 'number', isAsc);
-        if (isAsc) {
+        const sortedStarships = sortDTOListByProp(definedStarships, sortBy, 'number', isSortAscending);
+        if (isSortAscending) {
             return [...nonDefinedStarchips, ...sortedStarships]
         }
 
         return [...sortedStarships, ...nonDefinedStarchips];
-    }, [sortBy]);
-    const sortedStarships: Starship[] = sortFunction(starshipsInfo.starships, true);
+    }, [sortBy, isSortAscending]);
+    const sortedStarships: Starship[] = sortFunction(starshipsInfo.starships);
 
     return (
         <>
@@ -65,7 +65,8 @@ export const StarshipsComponent = (props: Props) => {
 
             <main className={classes.main}>
                 <SearchBar onSearch={handleOnSearch} search={search} onSelect={setSortBy} selectValue={sortBy}
-                           selectOptions={buildStarshipSortOptions()}/>
+                           selectOptions={buildStarshipSortOptions()} isAscending={isSortAscending}
+                           onChangeSortDirection={setIsSortAscending}/>
                 {loading ? null : <CardArray cards={mapStarshipVmListToCardVmList(sortedStarships)}/>}
             </main>
             <Loader isShown={loading}/>

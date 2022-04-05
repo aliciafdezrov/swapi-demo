@@ -66,10 +66,21 @@
   }
 
   .container {
+    width: 100%;
+    margin-left: 10px;
 
-    label {
-      height: 21px;
-      width: 282px;
+    .main-label {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .secondary-label {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .detail-label {
+      font-size: 0.8rem;
     }
   }
 }

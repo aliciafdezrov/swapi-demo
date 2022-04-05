@@ -9,17 +9,20 @@ interface Props {
     selectOptions: SelectItem[];
     selectValue: string;
     onSelect: (selectedValue: string) => void;
+    isAscending: boolean;
+    onChangeSortDirection: (isAscending: boolean) => void;
 }
 
 export const SearchBar = (props: Props) => {
-    const {search, onSearch, selectOptions, selectValue, onSelect} = props;
+    const {search, onSearch, selectOptions, selectValue, onSelect, isAscending, onChangeSortDirection} = props;
 
     return (
         <section className={classes.searchItems}>
             <div className={classes.spaceBetween}>
                 <SearchField defaultSearch={search} onSearch={onSearch}/></div>
             <div>
-                <SelectField onSelect={onSelect} value={selectValue} options={selectOptions}/>
+                <SelectField onSelect={onSelect} value={selectValue} options={selectOptions} isAscending={isAscending}
+                             onChangeSortDirection={onChangeSortDirection}/>
             </div>
         </section>
     );

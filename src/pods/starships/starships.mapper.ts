@@ -59,8 +59,8 @@ export const mapStarshipsFromApiToVm = (starships: apiModel.Starships): viewMode
 export const mapStarshipVmToCardVm = (starship: viewModel.Starship): CardVm => {
     const cardVm = createDefaultCardVm();
     cardVm.mainLabel = starship.name;
-    cardVm.secondaryLabel = starship.crew;
-    cardVm.detailLabel = starship.cargoCapacity;
+    cardVm.secondaryLabel = starship.cargoCapacity;
+    cardVm.detailLabel = starship.crew;
     try {
         cardVm.imgSrc = require(`../../../assets/img/starships/${starship.name.replace(/-|\s/g, '').toLowerCase()}.png`,)
     } catch (e) {
