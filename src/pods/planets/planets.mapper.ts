@@ -38,11 +38,11 @@ export const mapPlanetVmToCardVm = (planet: PlanetVm): CardVm => {
     cardVm.secondaryLabel = planet.climate;
     cardVm.detailLabel = planet.population;
     try {
-        cardVm.imgSrc = require(`../../../assets/img/planets/${planet.name.replace(/\s+/g, '').toLowerCase()}.jpg`,)
+        cardVm.imgSrc = require(`../../../assets/img/planets/${planet.name.replace(/-|\s/g, '').toLowerCase()}.jpg`,)
     } catch (e) {
         cardVm.imgSrc = ""
     }
-    cardVm.defaultImg = require("../../../assets/img/default.jpg");
+    cardVm.defaultImg = require("../../../assets/img/defaultplanet.jpg");
 
     return cardVm;
 }

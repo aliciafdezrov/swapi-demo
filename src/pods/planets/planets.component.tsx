@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import classes from './planets.style.scss';
 import {Planets, PlanetVm} from "./planets.vm";
 import {mapPlanetVmListToCardVmList} from "./planets.mapper";
+import {Pagination} from "../../common/components/pagination/pagination.component";
 import {SearchBar, CardArray, sortDTOListByProp} from "common";
 import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
 
@@ -55,13 +56,16 @@ export const PlanetsComponent = (props: Props) => {
                 <CardArray cards={mapPlanetVmListToCardVmList(sortedPlanets)}/>
             </main>
 
-            <button disabled={!planetsInfo.hasPreviousPage}
-                    onClick={() => onSearch(search, planetsInfo.currentPage - 1)}>prev
-            </button>
-            <span>{getFooterTextContent()}</span>
-            <button disabled={!planetsInfo.hasNextPage}
-                    onClick={() => onSearch(search, planetsInfo.currentPage + 1)}>next
-            </button>
+            <div className={classes.pagination}>
+                <Pagination
+                    search={search}
+                    currentPage={planetsInfo.currentPage}
+                    hasNextPage={planetsInfo.hasNextPage}
+                    hasPreviousPage={planetsInfo.hasPreviousPage}
+                    onSearch={onSearch}
+                    textContent={getFooterTextContent()}
+                />
+            </div>
         </>
     );
 };

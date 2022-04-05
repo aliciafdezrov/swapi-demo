@@ -62,11 +62,11 @@ export const mapStarshipVmToCardVm = (starship: viewModel.Starship): CardVm => {
     cardVm.secondaryLabel = starship.crew;
     cardVm.detailLabel = starship.cargoCapacity;
     try {
-        cardVm.imgSrc = require(`../../../assets/img/starships/${starship.name.replace(/\s+/g, '').toLowerCase()}.jpg`,)
+        cardVm.imgSrc = require(`../../../assets/img/starships/${starship.name.replace(/-|\s/g, '').toLowerCase()}.png`,)
     } catch (e) {
         cardVm.imgSrc = ""
     }
-    cardVm.defaultImg = require("../../../assets/img/default.jpg");
+    cardVm.defaultImg = require("../../../assets/img/defaultstarship.png");
 
     return cardVm;
 }

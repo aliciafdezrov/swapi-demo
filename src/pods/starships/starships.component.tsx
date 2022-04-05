@@ -3,6 +3,7 @@ import classes from './starships.style.scss';
 import {Starship, Starships} from "./starships.vm";
 import {CardArray, SearchBar, sortDTOListByProp} from "common";
 import {mapStarshipVmListToCardVmList} from "./starships.mapper";
+import {Pagination} from "../../common/components/pagination/pagination.component";
 import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
 
 interface Props {
@@ -67,15 +68,16 @@ export const StarshipsComponent = (props: Props) => {
                 <CardArray cards={mapStarshipVmListToCardVmList(sortedStarships)}/>
             </main>
 
-            <footer>
-                <button disabled={!starshipsInfo.hasPreviousPage}
-                        onClick={() => onSearch(search, starshipsInfo.currentPage - 1)}>prev
-                </button>
-                <span>{getFooterTextContent()}</span>
-                <button disabled={!starshipsInfo.hasNextPage}
-                        onClick={() => onSearch(search, starshipsInfo.currentPage + 1)}>next
-                </button>
-            </footer>
+            <div className={classes.pagination}>
+                <Pagination
+                    search={search}
+                    currentPage={starshipsInfo.currentPage}
+                    hasNextPage={starshipsInfo.hasNextPage}
+                    hasPreviousPage={starshipsInfo.hasPreviousPage}
+                    onSearch={onSearch}
+                    textContent={getFooterTextContent()}
+                />
+            </div>
         </>
     );
 };

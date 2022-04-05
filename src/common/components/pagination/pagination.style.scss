@@ -1,0 +1,22 @@
+@import "../../../_variables";
+
+.round {
+  border-radius: 50%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: black;
+}
+.round:disabled {
+  background-color: gray;
+  cursor: default;
+}
+
+.meta-info {
+  margin-left: 15px;
+  margin-right: 15px;
+}
