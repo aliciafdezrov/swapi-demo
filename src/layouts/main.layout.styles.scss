@@ -2,48 +2,145 @@
 
 .app-bar-horizontal {
   height: 50px;
-  margin-left: 50px;
-  background-color: white;
+  @media screen and (min-width: $low-res-target) {
+    margin-left: $default-width;
+  }
 
-  .inner-app-bar-arrangement {
+  @media screen and (max-width: $low-res-target) {
+    margin-left: $reduced-width;
+  }
+
+  border-bottom: 1px solid #333;
+
+  .title {
+    padding-left: 10px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    @media screen and (min-width: 320px) {
+      font-size: calc(15px + 6 * ((100vw - 320px) / 680));
+    }
+    @media screen and (min-width: 1000px) {
+      font-size: 22px;
+    }
+    font-family: 'Starjedi', serif, serif;
   }
 }
 
 .navigation {
-  background: #f8f8f8;
   height: 100%;
-  min-width: 150px;
+  @media screen and (min-width: $low-res-target) {
+    width: $default-width;
+  }
+
+  @media screen and (max-width: $low-res-target) {
+    width: $reduced-width;
+  }
+
   z-index: 10;
   position: fixed;
   left: 0;
   top: 0;
+  border-right: 1px solid #333;
 
+  .main-icon-placement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  .main-nav-arrangement {
+    .death-star-main-menu-icon {
+      height: 100px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    .death-star-main-menu-icon:hover {
+      filter: drop-shadow(0px 0px 3px #ffffff);
+    }
   }
+
+  .initial-border {
+    border-top: 2px solid #333;
+  }
+
+
+  .main-nav-item {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    border-bottom: 2px solid #333;
+    cursor: pointer;
+    text-decoration: inherit;
+    color: #999;
+    text-decoration: inherit;
+  }
+
+  .main-nav-item:hover {
+    color: $primary;
+    text-shadow: 0 0 1px $primary,
+    0 0 30px $primary,
+    0 0 12px $primary,
+    0 0 21px $primary,
+    0 0 38px $primary,
+    0 0 60px $primary;
+  }
+
+  .icon-and-title {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-left: 15px;
+
+    .icon-with-margin {
+      height: 15px;
+      margin-right: 5px;
+    }
+  }
+
+  .icon {
+    height: 15px;
+  }
+
+  .icon-shadow {
+    filter: drop-shadow(0px 0px 3px #ffffff);
+  }
+
 }
 
 .children-content {
-  margin-left: 150px;
+  @media screen and (min-width: $low-res-target) {
+    margin-left: $default-width;
+  }
+
+  @media screen and (max-width: $low-res-target) {
+    margin-left: $reduced-width;
+  }
+  background-position: top center;
+  background-image: url(https://lumiere-a.akamaihd.net/v1/images/background-stars-desktop_00cbf8a9.jpeg);
+  background-size: auto auto;
+  padding-bottom: 40px;
 }
 
 .menu-bottom {
   float: right;
   margin: 0;
   padding: 0;
-  color: #fff;
   clear: both;
   width: 100%;
   background: $main;
   position: fixed;
   bottom: 0;
   box-sizing: border-box;
-  z-index: 9;
+  z-index: 10;
   height: 40px;
 
   a {
     cursor: pointer;
-    color: #fff;
     padding: 10px;
     font-size: 14px;
     float: right;

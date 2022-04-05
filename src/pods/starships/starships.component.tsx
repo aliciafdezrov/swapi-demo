@@ -1,8 +1,8 @@
-import React from 'react';
-import {Grid} from "./components/grid/grid.component";
-import {SearchBar} from "./components/search-bar/search-bar.component";
+import React, {useState} from 'react';
 import classes from './starships.style.scss';
 import {Starships} from "./starships.vm";
+import {CardArray, SearchBar} from "common";
+import {mapStarshipVmListToCardVmList} from "./starships.mapper";
 
 interface Props {
     starshipsInfo: Starships;
@@ -12,6 +12,7 @@ interface Props {
 
 export const StarshipsComponent = (props: Props) => {
     const {starshipsInfo, onSearch, search} = props;
+    const [sortBy, setSortBy] = useState<string>();
 
     const handleOnSearch = (name: string) => {
         onSearch(name, 1);
@@ -23,17 +24,25 @@ export const StarshipsComponent = (props: Props) => {
         if (starshipsInfo.currentPage === 0) startIndex = 0;
         let endIndex = starshipsInfo.starships.length * starshipsInfo.currentPage;
 
-        return `${startIndex} to ${endIndex} of ${starshipsInfo.count} planets`;
+        return `${startIndex} to ${endIndex} of ${starshipsInfo.count} starships`;
+    }
+
+    const handleOnSort = (sortBy: string) => {
+        console.log(sortBy);
     }
 
     return (
         <>
-            <header className={classes.searchBar}>
-                <SearchBar defaultSearch={""} onSearch={handleOnSearch}/>
+            <header>
+                <div className={classes.sectionHeader}>
+                    <h2>{"Starships"}</h2>
+                </div>
             </header>
 
             <main className={classes.main}>
-                <Grid starships={starshipsInfo.starships}/>
+                <SearchBar onSearch={handleOnSearch} search={""} onSelect={handleOnSort} selectValue={sortBy}
+                           selectOptions={[{name: 'None', value: 'none'}]}/>
+                <CardArray cards={mapStarshipVmListToCardVmList(starshipsInfo.starships)}/>
             </main>
 
             <footer>

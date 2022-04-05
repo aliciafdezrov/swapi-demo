@@ -31,7 +31,7 @@ module.exports = {
                 loader: "babel-loader",
             },
             {
-                test: /\.(png|jpg)$/,
+                test: /\.(png|jpg|webp)$/,
                 type: "asset/resource",
             },
             {
@@ -41,7 +41,7 @@ module.exports = {
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
                 type: "asset/resource",
-            },
+            }
         ],
     },
     plugins: [

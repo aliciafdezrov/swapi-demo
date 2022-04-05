@@ -1,7 +1,7 @@
 import React from 'react';
 import * as api from './api';
 import {debounce} from "lodash";
-import {useNavigate, useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {createDefaultPlanets, Planets} from "./planets.vm";
 import {mapPlanetsFromApiToVm} from "./planets.mapper";
 import {switchRoutes} from "core";

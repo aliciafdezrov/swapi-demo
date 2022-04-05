@@ -4,6 +4,8 @@ import {PlanetsContainer} from "../pods/planets";
 
 export const PlanetsScene: React.FC = () => {
     return (
-        <PlanetsContainer/>
+        <MainLayout>
+            <PlanetsContainer/>
+        </MainLayout>
     );
 };

@@ -1,7 +1,7 @@
 import * as apiModel from './api/starships.api-model';
 import * as viewModel from './starships.vm';
 import {mapToCollection} from "common";
-import {mapPlanetListFromApiToVm} from "../planets/planets.mapper";
+import {CardVm, createDefaultCardVm} from "../../common/components/cards/card.vm";
 
 export const mapStarshipFromApiToVm = (
     starship: apiModel.Starship
@@ -30,3 +30,21 @@ export const mapStarshipsFromApiToVm = (starships: apiModel.Starships): viewMode
     }
     return starshipsInfo;
 }
+
+export const mapStarshipVmToCardVm = (starship: viewModel.Starship): CardVm => {
+    const cardVm = createDefaultCardVm();
+    cardVm.mainLabel = starship.name;
+    cardVm.secondaryLabel = starship.crew;
+    cardVm.detailLabel = starship.cargo_capacity;
+    try {
+        cardVm.imgSrc = require(`../../../assets/img/starships/${starship.name.replace(/\s+/g, '').toLowerCase()}.jpg`,)
+    } catch (e) {
+        cardVm.imgSrc = ""
+    }
+    cardVm.defaultImg = require("../../../assets/img/default.jpg");
+
+    return cardVm;
+}
+
+export const mapStarshipVmListToCardVmList = (starships: viewModel.Starship[]): CardVm[] =>
+    mapToCollection(starships, p => mapStarshipVmToCardVm(p));

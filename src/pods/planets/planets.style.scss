@@ -1,23 +1,21 @@
 @import "../../_variables";
 
 .main {
-  padding-top: 10px;
   padding-bottom: 30px;
 }
 
-.search-bar {
-  color: white;
+.section-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding-top: 25px;
+  align-items: center;
 
-  @media (min-width: 360px) {
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-  @media (max-width: 360px) {
-    padding-left: 25px;
-    padding-right: 25px;
+  h2 {
+    @media (min-width: $low-res-target) {
+      padding-left: 50px;
+    }
+    @media (max-width: $low-res-target) {
+      padding-left: 25px;
+    }
+    text-transform: uppercase;
   }
 }

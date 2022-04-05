@@ -1,12 +1,24 @@
 @import "_variables";
 
+@font-face {
+  font-family: 'Starjedi';
+  font-style: normal;
+  src: url(../assets/fonts/Starjedi.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat-regular';
+  font-style: normal;
+  src: url(../assets/fonts/Montserrat-Regular.ttf) format('truetype');
+}
+
 html,
 body {
   margin: 0;
   height: 100%;
   width: 100%;
   background: $background;
-  color: $textPrimary;
+  color: $primary;
   text-rendering: optimizeLegibility;
-  font-family: Montserrat-regular, serif, serif;
+  font-family: Montserrat-Regular, serif, serif;
 }
