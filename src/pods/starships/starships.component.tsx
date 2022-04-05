@@ -1,7 +1,7 @@
 import React, {useState, useCallback, useMemo} from 'react';
 import classes from './starships.style.scss';
 import {Starship, Starships} from "./starships.vm";
-import {CardArray, SearchBar, sortDTOListByProp} from "common";
+import {CardArray, Loader, SearchBar, sortDTOListByProp} from "common";
 import {mapStarshipVmListToCardVmList} from "./starships.mapper";
 import {Pagination} from "../../common/components/pagination/pagination.component";
 import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
@@ -10,6 +10,7 @@ interface Props {
     starshipsInfo: Starships;
     search: string;
     onSearch: (name: string, page?: number) => void;
+    loading: boolean;
 }
 
 const buildStarshipSortOptions = (): SelectItem[] => ([
@@ -24,7 +25,7 @@ const buildStarshipSortOptions = (): SelectItem[] => ([
 ]);
 
 export const StarshipsComponent = (props: Props) => {
-    const {starshipsInfo, onSearch, search} = props;
+    const {starshipsInfo, onSearch, search, loading} = props;
     const [sortBy, setSortBy] = useState<string>();
 
     const handleOnSearch = (name: string) => {
@@ -63,21 +64,24 @@ export const StarshipsComponent = (props: Props) => {
             </header>
 
             <main className={classes.main}>
-                <SearchBar onSearch={handleOnSearch} search={""} onSelect={setSortBy} selectValue={sortBy}
+                <SearchBar onSearch={handleOnSearch} search={search} onSelect={setSortBy} selectValue={sortBy}
                            selectOptions={buildStarshipSortOptions()}/>
-                <CardArray cards={mapStarshipVmListToCardVmList(sortedStarships)}/>
+                {loading ? null : <CardArray cards={mapStarshipVmListToCardVmList(sortedStarships)}/>}
             </main>
+            <Loader isShown={loading}/>
 
-            <div className={classes.pagination}>
-                <Pagination
-                    search={search}
-                    currentPage={starshipsInfo.currentPage}
-                    hasNextPage={starshipsInfo.hasNextPage}
-                    hasPreviousPage={starshipsInfo.hasPreviousPage}
-                    onSearch={onSearch}
-                    textContent={getFooterTextContent()}
-                />
-            </div>
+            {loading ? null : (
+                <div className={classes.pagination}>
+                    <Pagination
+                        search={search}
+                        currentPage={starshipsInfo.currentPage}
+                        hasNextPage={starshipsInfo.hasNextPage}
+                        hasPreviousPage={starshipsInfo.hasPreviousPage}
+                        onSearch={onSearch}
+                        textContent={getFooterTextContent()}
+                    />
+                </div>
+            )}
         </>
     );
 };

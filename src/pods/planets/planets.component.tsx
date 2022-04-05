@@ -3,13 +3,14 @@ import classes from './planets.style.scss';
 import {Planets, PlanetVm} from "./planets.vm";
 import {mapPlanetVmListToCardVmList} from "./planets.mapper";
 import {Pagination} from "../../common/components/pagination/pagination.component";
-import {SearchBar, CardArray, sortDTOListByProp} from "common";
+import {SearchBar, CardArray, sortDTOListByProp, Loader} from "common";
 import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
 
 interface Props {
     planetsInfo: Planets;
     search: string;
     onSearch: (name: string, page?: number) => void;
+    loading: boolean;
 }
 
 const buildPlanetsSortOptions = (): SelectItem[] => ([
@@ -20,7 +21,7 @@ const buildPlanetsSortOptions = (): SelectItem[] => ([
 ]);
 
 export const PlanetsComponent = (props: Props) => {
-    const {planetsInfo, onSearch, search} = props;
+    const {planetsInfo, onSearch, search, loading} = props;
     const [sortBy, setSortBy] = useState<string>();
 
     const handleOnSearch = (name: string) => {
@@ -51,21 +52,24 @@ export const PlanetsComponent = (props: Props) => {
             </header>
 
             <main className={classes.main}>
-                <SearchBar onSearch={handleOnSearch} search={""} onSelect={setSortBy} selectValue={sortBy}
+                <SearchBar onSearch={handleOnSearch} search={search} onSelect={setSortBy} selectValue={sortBy}
                            selectOptions={buildPlanetsSortOptions()}/>
-                <CardArray cards={mapPlanetVmListToCardVmList(sortedPlanets)}/>
+                {!loading ? <CardArray cards={mapPlanetVmListToCardVmList(sortedPlanets)}/> : null}
             </main>
+            <Loader isShown={loading}/>
 
-            <div className={classes.pagination}>
-                <Pagination
-                    search={search}
-                    currentPage={planetsInfo.currentPage}
-                    hasNextPage={planetsInfo.hasNextPage}
-                    hasPreviousPage={planetsInfo.hasPreviousPage}
-                    onSearch={onSearch}
-                    textContent={getFooterTextContent()}
-                />
-            </div>
+            {!loading ? (
+                <div className={classes.pagination}>
+                    <Pagination
+                        search={search}
+                        currentPage={planetsInfo.currentPage}
+                        hasNextPage={planetsInfo.hasNextPage}
+                        hasPreviousPage={planetsInfo.hasPreviousPage}
+                        onSearch={onSearch}
+                        textContent={getFooterTextContent()}
+                    />
+                </div>
+            ) : null}
         </>
     );
 };

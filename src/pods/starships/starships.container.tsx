@@ -5,9 +5,13 @@ import {createDefaultStarships, Starships} from "./starships.vm";
 
 export const StarshipsContainer: React.FC = () => {
     const [starshipsInfo, setStarshipsInfo] = React.useState<Starships>(createDefaultStarships());
+    const [loading, setLoading] = React.useState<boolean>(false);
     const {getQueryParam} = useSearchQueryParams();
     const {onSearch} = useSearch({
-        onLoadStarships: (vmStarships) => setStarshipsInfo(vmStarships),
+        onLoadStarships: (vmStarships) => {
+            setStarshipsInfo(vmStarships);
+            setLoading(false);
+        },
     });
 
     React.useEffect(() => {
@@ -16,10 +20,16 @@ export const StarshipsContainer: React.FC = () => {
         if (getQueryParam("page")) {
             page = Number(getQueryParam("page"));
         }
-        onSearch(nameQuery, page);
+        handleOnSearch(nameQuery, page);
     }, []);
 
+    const handleOnSearch = (name: string, page?: number) => {
+        setLoading(true);
+        onSearch(name, page);
+    }
+
     return (
-        <StarshipsComponent starshipsInfo={starshipsInfo} onSearch={onSearch} search={getQueryParam("search")}/>
+        <StarshipsComponent starshipsInfo={starshipsInfo} onSearch={handleOnSearch} search={getQueryParam("search")}
+                            loading={loading}/>
     );
 };

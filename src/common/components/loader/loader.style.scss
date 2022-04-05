@@ -1,0 +1,23 @@
+@import "src/variables";
+
+.container {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  margin: 5%;
+}
+
+.light {
+  display: flex;
+  justify-content: center;
+  color: $secondary;
+  width: 100%;
+  background: #fff;
+  height: 25px;
+  border-radius: 7px 7px 2px 2px;
+  box-shadow: 0 0 5px #fff, 0 0 8px #fff, 0 0 12px #fff, 0 0 15px blue, 0 0 25px blue;
+  z-index: 5;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  transition: right 5s;
+}
