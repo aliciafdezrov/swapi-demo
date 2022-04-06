@@ -3,7 +3,7 @@ import classes from './not-found.style.scss';
 import {switchRoutes} from "core/router";
 import {Link} from "react-router-dom";
 
-export const NotFound: React.FC = () => {
+export const NotFound = () => {
     return (
         <div className={classes.notFoundContainer}>
             <h1 className={classes.notFoundText}>

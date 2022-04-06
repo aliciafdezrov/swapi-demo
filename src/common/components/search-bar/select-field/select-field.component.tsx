@@ -10,13 +10,13 @@ interface Props {
     options: SelectItem[];
     value: string;
     onSelect: (value: string) => void;
-    isAscending?: boolean;
+    isAscending: boolean;
     onChangeSortDirection: (isAscending: boolean) => void;
 }
 
 const empty_option: SelectItem = {
     name: "None",
-    value: null
+    value: "default"
 }
 
 export const SelectField = (props: Props) => {
@@ -32,12 +32,15 @@ export const SelectField = (props: Props) => {
 
     return (
         <section className={classes.filterInput}>
-            <select onChange={handleOnSelect} value={value} name="sort" id="sorting-select">
+            <label htmlFor="sorting-select">Sort by:</label>
+            <select onChange={handleOnSelect} value={value ?? "default"} name="sort" id="sorting-select"
+                    aria-label="sort-by">
                 <>
-                    <option value={empty_option.value}>{empty_option.name}</option>
+                    <option aria-label={empty_option.name} value={empty_option.value}>{empty_option.name}</option>
                     {
                         options.map((option) => (
-                            <option key={option.value} value={option.value}>{option.name}</option>))
+                            <option key={option.value} aria-label={option.name}
+                                    value={option.value}>{option.name}</option>))
                     }
                 </>
             </select>

@@ -1,8 +1,7 @@
 import * as React from 'react';
-
 import classes from './main.layout.styles.scss';
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import {switchRoutes} from "core";
+import {switchRoutes} from "core/router";
 import useMediaQuery from "./media-query.hook";
 
 const planet = require("./planet.png")

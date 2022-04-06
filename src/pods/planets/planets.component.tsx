@@ -3,7 +3,8 @@ import classes from './planets.style.scss';
 import {Planets, PlanetVm} from "./planets.vm";
 import {mapPlanetVmListToCardVmList} from "./planets.mapper";
 import {Pagination} from "../../common/components/pagination/pagination.component";
-import {SearchBar, CardArray, sortDTOListByProp, Loader} from "common";
+import {SearchBar, CardArray, Loader} from "common/components";
+import {sortDTOListByProp} from "common/utils";
 import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
 
 interface Props {

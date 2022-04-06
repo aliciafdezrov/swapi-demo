@@ -1,6 +1,7 @@
 import React from "react";
 import {HashRouter as Router, Navigate, Route, Routes} from "react-router-dom";
-import {PlanetsScene, StarshipsScene} from "scenes";
+import {PlanetsScene} from "scenes/planets.scene";
+import {StarshipsScene} from "scenes/starships.scene";
 import {switchRoutes} from "./routes";
 import {NotFound} from "common/components";
 

@@ -1,7 +1,8 @@
-import React, {useState, useCallback, useMemo} from 'react';
+import React, {useState, useCallback} from 'react';
 import classes from './starships.style.scss';
 import {Starship, Starships} from "./starships.vm";
-import {CardArray, Loader, SearchBar, sortDTOListByProp} from "common";
+import {SearchBar, CardArray, Loader} from "common/components";
+import {sortDTOListByProp} from "common/utils";
 import {mapStarshipVmListToCardVmList} from "./starships.mapper";
 import {Pagination} from "../../common/components/pagination/pagination.component";
 import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";

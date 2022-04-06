@@ -1,6 +1,6 @@
 import * as apiModel from './api/starships.api-model';
 import * as viewModel from './starships.vm';
-import {mapToCollection} from "common";
+import {mapToCollection} from "common/mappers";
 import {CardVm, createDefaultCardVm} from "../../common/components/cards/card.vm";
 
 const castStringifyNumber = (str: string): number | string => {

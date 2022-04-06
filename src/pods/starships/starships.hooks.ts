@@ -4,7 +4,7 @@ import {debounce} from "lodash";
 import {useLocation, useNavigate} from "react-router-dom";
 import {createDefaultStarships, Starships} from "./starships.vm";
 import {mapStarshipsFromApiToVm} from "./starships.mapper";
-import {switchRoutes} from "core";
+import {switchRoutes} from "core/router";
 
 interface Props {
     onLoadStarships: (vmStarships: Starships) => void;

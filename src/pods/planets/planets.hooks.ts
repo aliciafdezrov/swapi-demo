@@ -4,7 +4,7 @@ import {debounce} from "lodash";
 import {useLocation, useNavigate} from "react-router-dom";
 import {createDefaultPlanets, Planets} from "./planets.vm";
 import {mapPlanetsFromApiToVm} from "./planets.mapper";
-import {switchRoutes} from "core";
+import {switchRoutes} from "core/router";
 
 interface Props {
     onLoadPlanets: (vmPlanets: Planets) => void;

@@ -1,8 +1,8 @@
 import * as apiModel from './api/planet.api-model';
 import * as viewModel from './planets.vm';
 import {createDefaultPlanets, PlanetVm} from './planets.vm';
-import {mapToCollection} from "common";
-import {CardVm, createDefaultCardVm} from "../../common/components/cards/card.vm";
+import {mapToCollection} from "common/mappers";
+import {CardVm, createDefaultCardVm} from "common/components/cards/card.vm";
 
 export const mapPlanetFromApiToVm = (
     planet: apiModel.Planet
