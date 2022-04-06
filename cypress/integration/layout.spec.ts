@@ -6,19 +6,19 @@ describe('Common layout tests', () => {
 
     it('should navigate to /planets on death start click', () => {
         cy.viewport("ipad-2");
-        cy.visit('/#/starships');
+        cy.visit('/starships');
         cy.get('#death-star-menu-item').click();
         cy.url().should('include', '/planets')
     })
 
     it('should navigate to /planets on menu item click', () => {
-        cy.visit('/#/starships');
+        cy.visit('/starships');
         cy.get('#planets-menu-item').click();
         cy.url().should('include', '/planets')
     })
 
     it('should navigate to /starships on menu item click', () => {
-        cy.visit('/#/planets');
+        cy.visit('/planets');
         cy.get('#starships-menu-item').click();
         cy.url().should('include', '/starships')
     })

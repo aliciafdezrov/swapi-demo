@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import classes from './starships.style.scss';
 import {Starship, Starships} from "./starships.vm";
 import {CardArray, CircularSpinner, SearchBar} from "common/components";

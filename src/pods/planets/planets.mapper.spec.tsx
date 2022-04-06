@@ -3,8 +3,8 @@ import {
     mapPlanetFromApiToVm,
     mapPlanetListFromApiToVm,
     mapPlanetsFromApiToVm,
-    mapPlanetVmToCardVm,
-    mapPlanetVmListToCardVmList
+    mapPlanetVmListToCardVmList,
+    mapPlanetVmToCardVm
 } from "./planets.mapper";
 
 describe('mapPlanetFromApiToVm tests', () => {

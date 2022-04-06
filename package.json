@@ -14,7 +14,8 @@
     "build:perf": "rimraf dist && npm run type-check && webpack --config ./config/webpack/perf.webpack.js",
     "test": "rimraf coverage && jest -c ./config/test/jest.js --verbose --coverage",
     "test:watch": "npm run test -- --watchAll -i",
-    "cypress": "run-p --race start & cypress open"
+    "cypress": "cypress open",
+    "cypress:run": "cypress run"
   },
   "author": "",
   "license": "ISC",

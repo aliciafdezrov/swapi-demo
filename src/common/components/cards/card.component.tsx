@@ -20,17 +20,19 @@ export const Card = (props: Props) => {
                  }}
             />
             <div className={classes.container}>
-              <div style={{paddingTop: '10px'}}>
-                <label id={"main-card-label"} className={classes.mainLabel}>{cardVm.mainLabel}</label>
-              </div>
+                <div style={{paddingTop: '10px'}}>
+                    <label id={"main-card-label"} className={classes.mainLabel}>{cardVm.mainLabel}</label>
+                </div>
 
-              <div style={{paddingTop: '10px'}}>
-                <label id={"secondary-card-label"} className={classes.secondaryLabel}>{cardVm.secondaryLabelHelperText ? cardVm.secondaryLabelHelperText + " " + cardVm.secondaryLabel : cardVm.secondaryLabel}</label>
-              </div>
+                <div style={{paddingTop: '10px'}}>
+                    <label id={"secondary-card-label"}
+                           className={classes.secondaryLabel}>{cardVm.secondaryLabelHelperText ? cardVm.secondaryLabelHelperText + " " + cardVm.secondaryLabel : cardVm.secondaryLabel}</label>
+                </div>
 
-              <div style={{paddingTop: '10px'}}>
-                <label id={"detail-card-label"} className={classes.detailLabel}>{cardVm.detailLabelHelperText + "  " + cardVm.detailLabel}</label>
-              </div>
+                <div style={{paddingTop: '10px'}}>
+                    <label id={"detail-card-label"}
+                           className={classes.detailLabel}>{cardVm.detailLabelHelperText + "  " + cardVm.detailLabel}</label>
+                </div>
 
             </div>
         </div>

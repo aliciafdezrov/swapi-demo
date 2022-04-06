@@ -1,6 +1,6 @@
 import {act, cleanup, renderHook} from '@testing-library/react-hooks';
-import {useSearch, useSearchQueryParams} from './planets.hooks';
-import * as api from './api/planets.api';
+import {useSearch, useSearchQueryParams} from './starships.hooks';
+import * as api from './api/starships.api';
 
 const mockNavigate = jest.fn();
 const mockLocation = jest.fn();
@@ -11,9 +11,9 @@ jest.mock('react-router-dom', () => ({
 jest.mock('lodash.debounce', () => jest.fn(fn => fn))
 
 describe('useSearch tests', () => {
-    const onLoadPlanetsStub = jest.fn();
+    const onLoadStarshipsStub = jest.fn();
     const useSearchDefaultProps = {
-        onLoadPlanets: onLoadPlanetsStub
+        onLoadStarships: onLoadStarshipsStub
     }
 
     beforeEach(() => {
@@ -27,8 +27,8 @@ describe('useSearch tests', () => {
     });
 
     test('should call immediately the api when calling it without name param', () => {
-        const getPlanetsSpy = jest
-            .spyOn(api, 'getPlanets')
+        const getstarshipsSpy = jest
+            .spyOn(api, 'getStarships')
             .mockResolvedValue({
                 count: 0,
                 next: "http://localhost:9999/planets/?page=2",
@@ -41,12 +41,12 @@ describe('useSearch tests', () => {
             result.current.onSearch(null)
         });
 
-        expect(getPlanetsSpy).toHaveBeenCalled();
+        expect(getstarshipsSpy).toHaveBeenCalled();
     });
 
     test('should call the api after 500ms applying debounce when calling it without name param', () => {
-        const getPlanetsSpy = jest
-            .spyOn(api, 'getPlanets')
+        const getStarshipsSpy = jest
+            .spyOn(api, 'getStarships')
             .mockResolvedValue({
                 count: 0,
                 next: "http://localhost:9999/planets/?page=2",
@@ -57,15 +57,15 @@ describe('useSearch tests', () => {
 
         act(() => {
             result.current.onSearch("test");
-            expect(getPlanetsSpy).not.toHaveBeenCalled();
+            expect(getStarshipsSpy).not.toHaveBeenCalled();
             jest.advanceTimersByTime(600);
         });
 
-        expect(getPlanetsSpy).toHaveBeenCalled();
+        expect(getStarshipsSpy).toHaveBeenCalled();
     });
 
-    test('should not call to loadPlanets when the api fails', () => {
-        jest.spyOn(api, 'getPlanets')
+    test('should not call to loadStarships when the api fails', () => {
+        jest.spyOn(api, 'getStarships')
             .mockRejectedValue('Some error');
         const {result} = renderHook(() => useSearch({...useSearchDefaultProps}));
 
@@ -74,7 +74,7 @@ describe('useSearch tests', () => {
         });
 
         expect(mockNavigate).not.toHaveBeenCalled();
-        expect(onLoadPlanetsStub).not.toHaveBeenCalled();
+        expect(onLoadStarshipsStub).not.toHaveBeenCalled();
     });
 });
 

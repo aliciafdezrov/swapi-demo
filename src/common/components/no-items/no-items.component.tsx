@@ -1,7 +1,5 @@
 import React from 'react';
 import classes from './no-items.style.scss';
-import {switchRoutes} from "core/router";
-import {Link} from "react-router-dom";
 
 export const NoItems: React.FC = () => {
     return (

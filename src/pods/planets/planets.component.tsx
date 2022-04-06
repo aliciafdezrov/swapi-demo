@@ -3,7 +3,7 @@ import classes from './planets.style.scss';
 import {Planets, PlanetVm} from "./planets.vm";
 import {mapPlanetVmListToCardVmList} from "./planets.mapper";
 import {Pagination} from "../../common/components/pagination/pagination.component";
-import {SearchBar, CardArray, CircularSpinner} from "common/components";
+import {CardArray, CircularSpinner, SearchBar} from "common/components";
 import {sortDTOListByProp} from "common/utils";
 import {empty_option, SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
 import {NoItems} from "../../common/components/no-items/no-items.component";

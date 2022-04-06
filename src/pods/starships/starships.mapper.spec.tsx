@@ -3,8 +3,8 @@ import {
     mapStarshipFromApiToVm,
     mapStarshipListFromApiToVm,
     mapStarshipsFromApiToVm,
-    mapStarshipVmToCardVm,
     mapStarshipVmListToCardVmList,
+    mapStarshipVmToCardVm,
 } from "./starships.mapper";
 
 describe('mapStarshipFromApiToVm tests', () => {

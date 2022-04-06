@@ -42,7 +42,7 @@ export const mapPlanetVmToCardVm = (planet: PlanetVm): CardVm => {
     cardVm.detailLabel = isNaN(Number(planet.population)) ? 'Unknown' : formatter.format(Number(planet.population))
     cardVm.detailLabelHelperText = 'Population of'
     try {
-        cardVm.imgSrc = require(`../../../assets/img/planets/${planet.name.replace(/-|\s/g, '').toLowerCase()}.jpg`);
+        cardVm.imgSrc = require(`../../../assets/img/planets/${planet.name.replace(/-|\s/g, '').toLowerCase()}.jpg`,)
     } catch (e) {
         cardVm.imgSrc = ""
     }

@@ -9,7 +9,6 @@ export const PlanetsContainer: React.FC = () => {
     const [planetsInfo, setPlanetsInfo] = React.useState<Planets>(createDefaultPlanets());
     const [loading, setLoading] = React.useState<boolean>(false);
     const {getQueryParam} = useSearchQueryParams();
-    const location = useLocation();
     const {onSearch} = useSearch({
         onLoadPlanets: (vmPlanets) => {
             setPlanetsInfo(vmPlanets);
@@ -17,14 +16,15 @@ export const PlanetsContainer: React.FC = () => {
         },
     });
 
+    const location = useLocation();
+
     //Initial and root route load
     React.useEffect(() => {
         if (location.pathname === switchRoutes.planets && location.search === '') {
             let nameQuery = getQueryParam("name");
-            let pageFromQuery = getQueryParam("page");
             let page;
-            if (pageFromQuery) {
-                page = Number(pageFromQuery);
+            if (getQueryParam("page")) {
+                page = Number(getQueryParam("page"));
             }
             handleOnSearch(nameQuery, page);
         }
