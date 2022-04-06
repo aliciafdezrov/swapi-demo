@@ -14,7 +14,7 @@ interface Props {
     onChangeSortDirection: (isAscending: boolean) => void;
 }
 
-const empty_option: SelectItem = {
+export const empty_option: SelectItem = {
     name: "None",
     value: "default"
 }
@@ -32,7 +32,6 @@ export const SelectField = (props: Props) => {
 
     return (
         <section className={classes.filterInput}>
-            <label htmlFor="sorting-select">Sort by:</label>
             <select onChange={handleOnSelect} value={value ?? "default"} name="sort" id="sorting-select"
                     aria-label="sort-by">
                 <>
@@ -46,10 +45,11 @@ export const SelectField = (props: Props) => {
             </select>
             {value !== undefined && value !== empty_option.name ?
                 isAscending ?
-                    <span onClick={() => onChangeSortDirection(!isAscending)} className={classes.arrow}>&#x25BC;</span>
-                    :
                     <span onClick={() => onChangeSortDirection(!isAscending)}
                           className={classes.arrow}>&#x25B2;</span>
+                    :
+                    <span onClick={() => onChangeSortDirection(!isAscending)} className={classes.arrow}>&#x25BC;</span>
+
                 : null
             }
         </section>

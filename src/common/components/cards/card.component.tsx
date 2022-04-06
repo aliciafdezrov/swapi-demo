@@ -12,6 +12,7 @@ export const Card = (props: Props) => {
     return (
         <div className={`${classes.card} ${classes.fadeInCard}`}>
             <img src={cardVm.imgSrc}
+                 id={"detail-card-img"}
                  alt={cardVm.mainLabel}
                  onError={(e: any) => {
                      e.target.onerror = null;
@@ -20,15 +21,15 @@ export const Card = (props: Props) => {
             />
             <div className={classes.container}>
               <div style={{paddingTop: '10px'}}>
-                <label className={classes.mainLabel}>{cardVm.mainLabel}</label>
+                <label id={"main-card-label"} className={classes.mainLabel}>{cardVm.mainLabel}</label>
               </div>
 
               <div style={{paddingTop: '10px'}}>
-                <label className={classes.secondaryLabel}>{cardVm.secondaryLabel}</label>
+                <label id={"secondary-card-label"} className={classes.secondaryLabel}>{cardVm.secondaryLabelHelperText ? cardVm.secondaryLabelHelperText + " " + cardVm.secondaryLabel : cardVm.secondaryLabel}</label>
               </div>
 
               <div style={{paddingTop: '10px'}}>
-                <label className={classes.detailLabel}>Population of {cardVm.detailLabel}</label>
+                <label id={"detail-card-label"} className={classes.detailLabel}>{cardVm.detailLabelHelperText + "  " + cardVm.detailLabel}</label>
               </div>
 
             </div>

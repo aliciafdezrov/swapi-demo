@@ -3,6 +3,7 @@ import classes from './main.layout.styles.scss';
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {switchRoutes} from "core/router";
 import useMediaQuery from "./media-query.hook";
+import { Dialog } from "../common/components/dialog/dialog.component";
 
 const planet = require("./planet.png")
 const rocket = require("./rocket.png")
@@ -10,17 +11,22 @@ const deathStarImage = require("../../assets/ui/deathstar.webp")
 
 export const MainLayout: React.FC = (props) => {
     const navigate = useNavigate();
-    const {pathname} = useLocation();
+    const {pathname, search} = useLocation();
     const matchesMinSize = useMediaQuery('(min-width: 601px)');
+		const [warningDialogOpen, setWarningDialogOpen] = React.useState(false);
 
     const currentPathname = (pathToCheck: string): boolean => {
         return pathToCheck === pathname;
     };
 
+		const handleToggleDialog = () => {
+			setWarningDialogOpen(!warningDialogOpen)
+		}
+
     return (
         <>
             <div className={classes.appBarHorizontal}>
-                <label className={classes.title}>imperial destroyer center</label>
+                <label id={"main-title"} className={classes.title}>imperial destroyer center</label>
             </div>
             <div>
                 <div className={classes.childrenContent}>
@@ -29,13 +35,13 @@ export const MainLayout: React.FC = (props) => {
                 <div className={classes.navigation}>
                     <div className={classes.mainIconPlacement}>
                         {matchesMinSize ?
-                            <img className={classes.deathStarMainMenuIcon}
+                            <img id={"death-star-menu-item"} className={classes.deathStarMainMenuIcon}
                                  onClick={() => navigate(switchRoutes.planets)}
                                  src={deathStarImage}
                                  alt={"death start main menu"}/> : null
                         }
                     </div>
-                    <Link style={currentPathname(switchRoutes.planets) ? {color: '#ffffff'} : null}
+                    <Link id={"planets-menu-item"} style={currentPathname(switchRoutes.planets) ? {color: '#ffffff'} : null}
                           className={`${classes.mainNavItem} ${classes.initialBorder}`} to={switchRoutes.planets}>
                         {matchesMinSize ?
                             <div className={classes.iconAndTitle}>
@@ -50,7 +56,7 @@ export const MainLayout: React.FC = (props) => {
                         }
 
                     </Link>
-                    <Link style={currentPathname(switchRoutes.starships) ? {color: '#ffffff'} : null}
+                    <Link id={"starships-menu-item"} style={currentPathname(switchRoutes.starships) ? {color: '#ffffff'} : null}
                           className={classes.mainNavItem}
                           to={switchRoutes.starships}>
                         {matchesMinSize ?
@@ -68,12 +74,18 @@ export const MainLayout: React.FC = (props) => {
 
                 </div>
                 <div className={classes.menuBottom}>
-                    <a onClick={() => {
-                    }}>
-                        <span>Footer</span>
+                    <a id={"about-footer-anchor"} onClick={handleToggleDialog}>
+                        <span>About sorting: &#9432;</span>
                     </a>
                 </div>
             </div>
+
+					<Dialog
+						isOpen={warningDialogOpen}
+						message={"API doesn't support sorting. Therefore, only the items of the current page will be displayed sorted"}
+						onHide={handleToggleDialog}
+						header={"Warning"}
+					/>
         </>
     )
         ;

@@ -10,7 +10,7 @@ interface Props {
 export const CardArray = (props: Props) => {
     const {cards} = props;
     return (
-        <div className={classes.gridContainer}>
+        <div id={"card-array"} className={classes.gridContainer}>
             {
                 cards.map(item => <Card key={item.mainLabel} cardVm={item}/>)
             }

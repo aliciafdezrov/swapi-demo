@@ -3,7 +3,9 @@ export interface CardVm {
     defaultImg: string;
     mainLabel: string;
     secondaryLabel: string;
+    secondaryLabelHelperText?: string;
     detailLabel: string;
+    detailLabelHelperText: string;
 }
 
 export const createDefaultCardVm = (): CardVm => ({
@@ -11,5 +13,6 @@ export const createDefaultCardVm = (): CardVm => ({
     detailLabel: "",
     defaultImg: "",
     secondaryLabel: "",
-    mainLabel: ""
+    mainLabel: "",
+    detailLabelHelperText: "",
 })

@@ -1,11 +1,12 @@
 import React, {useState, useCallback} from 'react';
 import classes from './starships.style.scss';
 import {Starship, Starships} from "./starships.vm";
-import {SearchBar, CardArray, Loader} from "common/components";
+import {CardArray, CircularSpinner, SearchBar} from "common/components";
 import {sortDTOListByProp} from "common/utils";
 import {mapStarshipVmListToCardVmList} from "./starships.mapper";
 import {Pagination} from "../../common/components/pagination/pagination.component";
-import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
+import {empty_option, SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
+import {NoItems} from "../../common/components/no-items/no-items.component";
 
 interface Props {
     starshipsInfo: Starships;
@@ -34,6 +35,14 @@ export const StarshipsComponent = (props: Props) => {
         onSearch(name, 1);
     }
 
+    const handleOnPaginationSearch = (name: string, page: number) => {
+        onSearch(name, page);
+        if (sortBy !== undefined || sortBy !== empty_option.name) {
+            setSortBy(empty_option.name);
+            setIsSortAscending(true);
+        }
+    }
+
     const getFooterTextContent = () => {
         const planetsLength = starshipsInfo.starships.length;
         let startIndex = planetsLength * starshipsInfo.currentPage - planetsLength
@@ -60,7 +69,7 @@ export const StarshipsComponent = (props: Props) => {
         <>
             <header>
                 <div className={classes.sectionHeader}>
-                    <h2>{"Starships"}</h2>
+                    <h2 id={"category-header-starships"}>{"Starships"}</h2>
                 </div>
             </header>
 
@@ -68,22 +77,22 @@ export const StarshipsComponent = (props: Props) => {
                 <SearchBar onSearch={handleOnSearch} search={search} onSelect={setSortBy} selectValue={sortBy}
                            selectOptions={buildStarshipSortOptions()} isAscending={isSortAscending}
                            onChangeSortDirection={setIsSortAscending}/>
-                {loading ? null : <CardArray cards={mapStarshipVmListToCardVmList(sortedStarships)}/>}
+                {loading ? <div className={classes.mainSpinner}><CircularSpinner/></div> : sortedStarships.length > 0 ?
+                    <CardArray cards={mapStarshipVmListToCardVmList(sortedStarships)}/> : <NoItems/>}
             </main>
-            <Loader isShown={loading}/>
 
-            {loading ? null : (
+            {loading || sortedStarships.length === 0 ? null :
                 <div className={classes.pagination}>
                     <Pagination
                         search={search}
                         currentPage={starshipsInfo.currentPage}
                         hasNextPage={starshipsInfo.hasNextPage}
                         hasPreviousPage={starshipsInfo.hasPreviousPage}
-                        onSearch={onSearch}
+                        onSearch={handleOnPaginationSearch}
                         textContent={getFooterTextContent()}
                     />
                 </div>
-            )}
+            }
         </>
     );
 };

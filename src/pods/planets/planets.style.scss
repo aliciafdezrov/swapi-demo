@@ -2,6 +2,12 @@
 
 .main {
   padding-bottom: 30px;
+  .main-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(90vh - 100px);
+  }
 }
 
 .section-header {

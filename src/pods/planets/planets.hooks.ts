@@ -15,7 +15,7 @@ export const useSearch = (props: Props) => {
 
     const debouncedSearch = debounce(async (name: string, page?: number) => {
         await onSearch(name, page);
-    }, 500);
+    }, 200);
 
     const onSearch = React.useCallback(async (name: string, page?: number) => {
         try {
@@ -53,6 +53,7 @@ export const useSearchQueryParams = () => {
     const location = useLocation();
 
     const getQueryParam = React.useCallback((query: string) => {
+        console.log(location.search)
         const searchParams = new URLSearchParams(location.search);
         const queryResult = searchParams.get(query);
         if (queryResult) {

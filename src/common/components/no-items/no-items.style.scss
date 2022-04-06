@@ -1,0 +1,19 @@
+@import "../../../variables";
+
+.not-items-container {
+  margin-top: 100px;
+  height: calc(80vh - 100px);
+
+  .not-items-text {
+    color: $primary;
+    text-align: center;
+    font-weight: 300;
+    font-size: 2rem;
+    text-shadow: 0 0 1px $primary,
+    0 0 30px $primary,
+    0 0 12px $primary,
+    0 0 21px $primary,
+    0 0 38px $primary,
+    0 0 60px $primary;
+  }
+}

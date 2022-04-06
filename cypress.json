@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:8080/",
+  "ignoreTestFiles": [
+    "*.page.js",
+    "utils.js",
+    "*.d.ts"
+  ]
+}

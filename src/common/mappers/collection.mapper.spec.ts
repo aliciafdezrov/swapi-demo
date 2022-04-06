@@ -1,6 +1,6 @@
 import {mapToCollection} from './collection.mapper';
 
-describe('common/mappers/collection.mapper spec', () => {
+describe('collection mapper tests', () => {
     describe('mapToCollection', () => {
         it('shoudl return empty array when it feeds collectio equals undefined', () => {
             //Arrange

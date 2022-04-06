@@ -3,9 +3,10 @@ import classes from './planets.style.scss';
 import {Planets, PlanetVm} from "./planets.vm";
 import {mapPlanetVmListToCardVmList} from "./planets.mapper";
 import {Pagination} from "../../common/components/pagination/pagination.component";
-import {SearchBar, CardArray, Loader} from "common/components";
+import {SearchBar, CardArray, CircularSpinner} from "common/components";
 import {sortDTOListByProp} from "common/utils";
-import {SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
+import {empty_option, SelectItem} from "../../common/components/search-bar/select-field/select-field.component";
+import {NoItems} from "../../common/components/no-items/no-items.component";
 
 interface Props {
     planetsInfo: Planets;
@@ -30,6 +31,14 @@ export const PlanetsComponent = (props: Props) => {
         onSearch(name, 1);
     }
 
+    const handleOnPaginationSearch = (name: string, page?: number) => {
+        onSearch(name, page);
+        if (sortBy !== undefined || sortBy !== empty_option.name) {
+            setSortBy(empty_option.name);
+            setIsSortAscending(true);
+        }
+    }
+
     const getFooterTextContent = () => {
         const planetsLength = planetsInfo.planets.length;
         let startIndex = planetsLength * planetsInfo.currentPage - planetsLength
@@ -49,7 +58,7 @@ export const PlanetsComponent = (props: Props) => {
         <>
             <header>
                 <div className={classes.sectionHeader}>
-                    <h2>{"Planets"}</h2>
+                    <h2 id={"category-header-planets"}>{"Planets"}</h2>
                 </div>
             </header>
 
@@ -57,22 +66,22 @@ export const PlanetsComponent = (props: Props) => {
                 <SearchBar onSearch={handleOnSearch} search={search} onSelect={setSortBy} selectValue={sortBy}
                            selectOptions={buildPlanetsSortOptions()} isAscending={isSortAscending}
                            onChangeSortDirection={setIsSortAscending}/>
-                {!loading ? <CardArray cards={mapPlanetVmListToCardVmList(sortedPlanets)}/> : null}
+                {loading ? <div className={classes.mainSpinner}><CircularSpinner/></div> : sortedPlanets.length > 0 ?
+                    <CardArray cards={mapPlanetVmListToCardVmList(sortedPlanets)}/> : <NoItems/>}
             </main>
-            <Loader isShown={loading}/>
 
-            {!loading ? (
+            {loading || sortedPlanets.length === 0 ? null :
                 <div className={classes.pagination}>
                     <Pagination
                         search={search}
                         currentPage={planetsInfo.currentPage}
                         hasNextPage={planetsInfo.hasNextPage}
                         hasPreviousPage={planetsInfo.hasPreviousPage}
-                        onSearch={onSearch}
+                        onSearch={handleOnPaginationSearch}
                         textContent={getFooterTextContent()}
                     />
                 </div>
-            ) : null}
+            }
         </>
     );
 };

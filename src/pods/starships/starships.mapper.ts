@@ -3,6 +3,8 @@ import * as viewModel from './starships.vm';
 import {mapToCollection} from "common/mappers";
 import {CardVm, createDefaultCardVm} from "../../common/components/cards/card.vm";
 
+let formatter = Intl.NumberFormat('en', {notation: 'compact'});
+
 const castStringifyNumber = (str: string): number | string => {
     let parsedStr = str;
     if (str.includes(',')) {
@@ -24,7 +26,20 @@ export const mapStarshipFromApiToVm = (
 ): viewModel.Starship => {
     if (!starship) return viewModel.createEmptyStarship();
     return {
-        ...starship,
+        starship_class: starship.starship_class,
+        name: starship.name,
+        model: starship.model,
+        manufacturer: starship.manufacturer,
+        length: starship.length,
+        crew: starship.crew,
+        passengers: starship.passengers,
+        MGLT: starship.MGLT,
+        consumables: starship.consumables,
+        films: starship.films,
+        pilots: starship.pilots,
+        url: starship.url,
+        created: starship.created,
+        edited: starship.edited,
         crewAbsoluteValue: castStringifyNumber(starship.crew),
         cargoCapacity: starship.cargo_capacity,
         cargoCapacityAbsoluteValue: castStringifyNumber(starship.cargo_capacity),
@@ -57,10 +72,12 @@ export const mapStarshipsFromApiToVm = (starships: apiModel.Starships): viewMode
 }
 
 export const mapStarshipVmToCardVm = (starship: viewModel.Starship): CardVm => {
-    const cardVm = createDefaultCardVm();
+    let cardVm = createDefaultCardVm();
     cardVm.mainLabel = starship.name;
-    cardVm.secondaryLabel = starship.cargoCapacity;
-    cardVm.detailLabel = starship.crew;
+    cardVm.secondaryLabel = isNaN(Number(starship.cargoCapacityAbsoluteValue)) ? 'Unknown' : formatter.format(Number(starship.cargoCapacityAbsoluteValue));
+    cardVm.secondaryLabelHelperText = "Cargo capacity:"
+    cardVm.detailLabel = isNaN(Number(starship.crewAbsoluteValue)) ? 'Unknown' : formatter.format(Number(starship.crewAbsoluteValue))
+    cardVm.detailLabelHelperText = 'Max crew of'
     try {
         cardVm.imgSrc = require(`../../../assets/img/starships/${starship.name.replace(/-|\s/g, '').toLowerCase()}.png`,)
     } catch (e) {

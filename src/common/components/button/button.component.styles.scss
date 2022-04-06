@@ -1,0 +1,15 @@
+@import "src/variables";
+
+.button {
+  background: $main 0 0 no-repeat padding-box;
+  border-radius: 35px;
+  opacity: 1;
+  width: 100px;
+  height: 70px;
+  border: none;
+  color: white;
+  font-family: Roboto, sans-serif;
+  font-weight: bold;
+  font-size: 26px;
+  cursor: pointer;
+}

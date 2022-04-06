@@ -15,7 +15,7 @@ export const useSearch = (props: Props) => {
 
     const debouncedSearch = debounce(async (name: string, page?: number) => {
         await onSearch(name, page);
-    }, 500);
+    }, 200);
 
     const onSearch = React.useCallback(async (name: string, page?: number) => {
         try {

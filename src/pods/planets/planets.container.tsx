@@ -2,12 +2,14 @@ import React from 'react';
 import {useSearch, useSearchQueryParams} from './planets.hooks';
 import {createDefaultPlanets, Planets} from "./planets.vm";
 import {PlanetsComponent} from "./planets.component";
-import classes from './planets.style.scss';
+import {useLocation} from "react-router-dom";
+import {switchRoutes} from "core/router";
 
 export const PlanetsContainer: React.FC = () => {
     const [planetsInfo, setPlanetsInfo] = React.useState<Planets>(createDefaultPlanets());
     const [loading, setLoading] = React.useState<boolean>(false);
     const {getQueryParam} = useSearchQueryParams();
+    const location = useLocation();
     const {onSearch} = useSearch({
         onLoadPlanets: (vmPlanets) => {
             setPlanetsInfo(vmPlanets);
@@ -15,14 +17,18 @@ export const PlanetsContainer: React.FC = () => {
         },
     });
 
+    //Initial and root route load
     React.useEffect(() => {
-        let nameQuery = getQueryParam("name");
-        let page;
-        if (getQueryParam("page")) {
-            page = Number(getQueryParam("page"));
+        if (location.pathname === switchRoutes.planets && location.search === '') {
+            let nameQuery = getQueryParam("name");
+            let pageFromQuery = getQueryParam("page");
+            let page;
+            if (pageFromQuery) {
+                page = Number(pageFromQuery);
+            }
+            handleOnSearch(nameQuery, page);
         }
-        handleOnSearch(nameQuery, page);
-    }, []);
+    }, [location.key]);
 
     const handleOnSearch = (name: string, page?: number) => {
         setLoading(true);

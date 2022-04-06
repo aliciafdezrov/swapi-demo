@@ -19,7 +19,7 @@ describe('Card component specs', () => {
         cardVmMocked.secondaryLabel = "secondary label";
         render(<Card cardVm={cardVmMocked}/>);
         expect(screen.getByText('card-item')).toBeInTheDocument();
-        expect(screen.getByText("Population of detail label")).toBeInTheDocument();
+        expect(screen.getByText("detail label")).toBeInTheDocument();
         expect(screen.getByText("secondary label")).toBeInTheDocument();
     });
 });

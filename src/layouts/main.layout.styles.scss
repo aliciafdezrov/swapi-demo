@@ -1,4 +1,4 @@
-@import "../variables";
+@import "src/variables";
 
 .app-bar-horizontal {
   height: 50px;
@@ -146,6 +146,10 @@
     float: right;
     text-decoration: none;
     margin-right: 20px;
+
+    span {
+      font-size: 1.1rem;
+    }
 
   }
 

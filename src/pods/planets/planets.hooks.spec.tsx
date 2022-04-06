@@ -1,11 +1,13 @@
 import {renderHook, act, cleanup} from '@testing-library/react-hooks';
-import {useSearch} from './planets.hooks';
+import {useSearch, useSearchQueryParams} from './planets.hooks';
 import * as api from './api/planets.api';
 import {switchRoutes} from "core/router";
 
 const mockNavigate = jest.fn();
+const mockLocation = jest.fn();
 jest.mock('react-router-dom', () => ({
-    useNavigate: () => mockNavigate
+    useNavigate: () => mockNavigate,
+    useLocation: () => mockLocation,
 }));
 jest.mock('lodash.debounce', () => jest.fn(fn => fn))
 
@@ -17,6 +19,7 @@ describe('useSearch tests', () => {
 
     beforeEach(() => {
         jest.useFakeTimers();
+        jest.resetAllMocks();
     });
 
     afterEach(() => {
@@ -62,26 +65,29 @@ describe('useSearch tests', () => {
         expect(getPlanetsSpy).toHaveBeenCalled();
     });
 
-    xtest('should add search params when the api resolves correctly', () => {
-        const getPlanetsSpy = jest
-            .spyOn(api, 'getPlanets')
-            .mockResolvedValue({
-                count: 0,
-                next: "http://localhost:9999/planets/?page=6",
-                previous: "http://localhost:9999/planets/?page=4",
-                results: [],
-            });
+    test('should not call to loadPlanets when the api fails', () => {
+        jest.spyOn(api, 'getPlanets')
+            .mockRejectedValue('Some error');
         const {result} = renderHook(() => useSearch({...useSearchDefaultProps}));
 
         act(() => {
-            result.current.onSearch("test1", 5);
-            jest.advanceTimersByTime(20000);
+            result.current.onSearch(null);
         });
 
-        expect(mockNavigate).toHaveBeenCalled();
-        expect(mockNavigate).toHaveBeenCalledWith({
-            pathname: switchRoutes.planets,
-            search: `?name=test1&page=5`
-        })
+        expect(mockNavigate).not.toHaveBeenCalled();
+        expect(onLoadPlanetsStub).not.toHaveBeenCalled();
+    });
+});
+
+describe('useSearchQueryParams tests', () => {
+    test('should return empty string when search is empty', () => {
+        const {result} = renderHook(() => useSearchQueryParams());
+        let queryParam;
+
+        act(() => {
+            queryParam = result.current.getQueryParam("search")
+        });
+
+        expect(queryParam).toBe('');
     });
 });

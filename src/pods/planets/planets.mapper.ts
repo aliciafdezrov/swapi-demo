@@ -4,6 +4,8 @@ import {createDefaultPlanets, PlanetVm} from './planets.vm';
 import {mapToCollection} from "common/mappers";
 import {CardVm, createDefaultCardVm} from "common/components/cards/card.vm";
 
+let formatter = Intl.NumberFormat('en', {notation: 'compact'});
+
 export const mapPlanetFromApiToVm = (
     planet: apiModel.Planet
 ): viewModel.PlanetVm => {
@@ -36,9 +38,11 @@ export const mapPlanetVmToCardVm = (planet: PlanetVm): CardVm => {
     const cardVm = createDefaultCardVm();
     cardVm.mainLabel = planet.name;
     cardVm.secondaryLabel = planet.climate;
-    cardVm.detailLabel = planet.population;
+    cardVm.secondaryLabelHelperText = "Climate:"
+    cardVm.detailLabel = isNaN(Number(planet.population)) ? 'Unknown' : formatter.format(Number(planet.population))
+    cardVm.detailLabelHelperText = 'Population of'
     try {
-        cardVm.imgSrc = require(`../../../assets/img/planets/${planet.name.replace(/-|\s/g, '').toLowerCase()}.jpg`,)
+        cardVm.imgSrc = require(`../../../assets/img/planets/${planet.name.replace(/-|\s/g, '').toLowerCase()}.jpg`);
     } catch (e) {
         cardVm.imgSrc = ""
     }
