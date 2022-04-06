@@ -14,7 +14,7 @@ describe('mapPlanetFromApiToVm tests', () => {
     });
 
     it('should return planet passed as param as view model planet', () => {
-        const planet = {
+        const apiPlanet = {
             name: "planet",
             diameter: "200",
             rotation_period: "",
@@ -30,8 +30,25 @@ describe('mapPlanetFromApiToVm tests', () => {
             created: "",
             edited: ""
         };
-        const result = mapPlanetFromApiToVm(planet);
-        expect(result).toEqual(planet);
+
+        const vmPlanet = {
+            name: "planet",
+            diameter: "200",
+            rotationPeriod: "",
+            orbitalPeriod: "",
+            gravity: "",
+            population: "200000",
+            climate: "",
+            terrain: "",
+            surfaceWater: "",
+            residents: [],
+            films: [],
+            url: "",
+            created: "",
+            edited: ""
+        }
+        const result = mapPlanetFromApiToVm(apiPlanet);
+        expect(result).toEqual(vmPlanet);
     });
 });
 
@@ -42,7 +59,7 @@ describe('mapPlanetListFromApiToVm tests', () => {
     });
 
     it('should return planet passed as param as view model planet', () => {
-        const planet = {
+        const apiPlanet = {
             name: "planet", diameter: "200",
             rotation_period: "",
             orbital_period: "",
@@ -57,11 +74,27 @@ describe('mapPlanetListFromApiToVm tests', () => {
             created: "",
             edited: ""
         };
-        const result = mapPlanetListFromApiToVm([planet, planet, planet]);
+        const vmPlanet = {
+            name: "planet",
+            diameter: "200",
+            rotationPeriod: "",
+            orbitalPeriod: "",
+            gravity: "",
+            population: "200000",
+            climate: "",
+            terrain: "",
+            surfaceWater: "",
+            residents: [],
+            films: [],
+            url: "",
+            created: "",
+            edited: ""
+        };
+        const result = mapPlanetListFromApiToVm([apiPlanet, apiPlanet, apiPlanet]);
         expect(result.length).toBe(3);
-        expect(result[0]).toEqual(planet);
-        expect(result[1]).toEqual(planet);
-        expect(result[2]).toEqual(planet);
+        expect(result[0]).toEqual(vmPlanet);
+        expect(result[1]).toEqual(vmPlanet);
+        expect(result[2]).toEqual(vmPlanet);
     });
 });
 
@@ -104,14 +137,15 @@ describe('mapPlanetsFromApiToVm tests', () => {
 describe('mapPlanetVmToCardVm tests', () => {
     it('should map planet info to card info', () => {
         const planet = {
-            name: "planet", diameter: "200",
-            rotation_period: "",
-            orbital_period: "",
+            name: "planet",
+            diameter: "200",
+            rotationPeriod: "",
+            orbitalPeriod: "",
             gravity: "",
             population: "200000",
             climate: "some climate",
             terrain: "",
-            surface_water: "",
+            surfaceWater: "",
             residents: [],
             films: [],
             url: "",
@@ -128,14 +162,15 @@ describe('mapPlanetVmToCardVm tests', () => {
 
     it('should return population of unknown when population is NaN', () => {
         const planet = {
-            name: "planet", diameter: "200",
-            rotation_period: "",
-            orbital_period: "",
+            name: "planet",
+            diameter: "200",
+            rotationPeriod: "",
+            orbitalPeriod: "",
             gravity: "",
             population: "some text",
             climate: "some climate",
             terrain: "",
-            surface_water: "",
+            surfaceWater: "",
             residents: [],
             films: [],
             url: "",
@@ -152,14 +187,15 @@ describe('mapPlanetVmToCardVm tests', () => {
 
     it('should return population of unknown when population is NaN', () => {
         const planet = {
-            name: "planet", diameter: "200",
-            rotation_period: "",
-            orbital_period: "",
+            name: "planet",
+            diameter: "200",
+            rotationPeriod: "",
+            orbitalPeriod: "",
             gravity: "",
             population: "some text",
             climate: "some climate",
             terrain: "",
-            surface_water: "",
+            surfaceWater: "",
             residents: [],
             films: [],
             url: "",

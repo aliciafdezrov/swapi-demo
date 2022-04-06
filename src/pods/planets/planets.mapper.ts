@@ -9,7 +9,23 @@ let formatter = Intl.NumberFormat('en', {notation: 'compact'});
 export const mapPlanetFromApiToVm = (
     planet: apiModel.Planet
 ): viewModel.PlanetVm => {
-    return planet ?? viewModel.createEmptyPlanet();
+    if (!planet) return viewModel.createEmptyPlanet();
+    return {
+        name: planet.name,
+        diameter: planet.diameter,
+        rotationPeriod: planet.rotation_period,
+        orbitalPeriod: planet.orbital_period,
+        gravity: planet.gravity,
+        population: planet.population,
+        climate: planet.climate,
+        terrain: planet.terrain,
+        surfaceWater: planet.surface_water,
+        residents: planet.residents,
+        films: planet.films,
+        url: planet.url,
+        created: planet.created,
+        edited: planet.edited,
+    }
 };
 
 export const mapPlanetListFromApiToVm = (

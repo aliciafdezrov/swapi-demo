@@ -8,7 +8,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockNavigate,
     useLocation: () => mockLocation,
 }));
-jest.mock('lodash.debounce', () => jest.fn(fn => fn))
+jest.mock('lodash.debounce', () => jest.fn(fn => fn));
 
 describe('useSearch tests', () => {
     const onLoadPlanetsStub = jest.fn();
@@ -19,6 +19,8 @@ describe('useSearch tests', () => {
     beforeEach(() => {
         jest.useFakeTimers();
         jest.resetAllMocks();
+        jest.spyOn(console, 'error').mockImplementation(() => {
+        });
     });
 
     afterEach(() => {

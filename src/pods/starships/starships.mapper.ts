@@ -26,7 +26,7 @@ export const mapStarshipFromApiToVm = (
 ): viewModel.Starship => {
     if (!starship) return viewModel.createEmptyStarship();
     return {
-        starship_class: starship.starship_class,
+        starshipClass: starship.starship_class,
         name: starship.name,
         model: starship.model,
         manufacturer: starship.manufacturer,

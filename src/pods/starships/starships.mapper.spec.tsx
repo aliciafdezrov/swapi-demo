@@ -28,8 +28,8 @@ describe('mapStarshipFromApiToVm tests', () => {
             MGLT: "",
             cargo_capacity: "2000000",
             consumables: "",
-            films: "",
-            pilots: "",
+            films: [],
+            pilots: [],
             url: "",
             created: "",
             edited: ""
@@ -38,7 +38,7 @@ describe('mapStarshipFromApiToVm tests', () => {
         expect(result).toEqual({
             name: "starship",
             model: "model",
-            starship_class: "",
+            starshipClass: "",
             manufacturer: "",
             costInCredits: "",
             length: "150",
@@ -51,8 +51,8 @@ describe('mapStarshipFromApiToVm tests', () => {
             cargoCapacityAbsoluteValue: 2000000,
             crewAbsoluteValue: 300,
             consumables: "",
-            films: "",
-            pilots: "",
+            films: [],
+            pilots: [],
             url: "",
             created: "",
             edited: ""
@@ -75,8 +75,8 @@ describe('mapStarshipListFromApiToVm tests', () => {
         MGLT: "",
         cargo_capacity: "2000000",
         consumables: "",
-        films: "",
-        pilots: "",
+        films: [],
+        pilots: [],
         url: "",
         created: "",
         edited: ""
@@ -85,7 +85,7 @@ describe('mapStarshipListFromApiToVm tests', () => {
     const vmStarship = {
         name: "starship",
         model: "model",
-        starship_class: "",
+        starshipClass: "",
         manufacturer: "",
         costInCredits: "",
         length: "150",
@@ -98,8 +98,8 @@ describe('mapStarshipListFromApiToVm tests', () => {
         cargoCapacityAbsoluteValue: 2000000,
         crewAbsoluteValue: 300,
         consumables: "",
-        films: "",
-        pilots: "",
+        films: [],
+        pilots: [],
         url: "",
         created: "",
         edited: ""
@@ -159,7 +159,7 @@ describe('mapStarshipVmToCardVm tests', () => {
     const vmStarship = {
         name: "starship",
         model: "model",
-        starship_class: "",
+        starshipClass: "",
         manufacturer: "",
         costInCredits: "",
         length: "150",
@@ -172,8 +172,8 @@ describe('mapStarshipVmToCardVm tests', () => {
         cargoCapacityAbsoluteValue: 2000000,
         crewAbsoluteValue: 300,
         consumables: "",
-        films: "",
-        pilots: "",
+        films: [],
+        pilots: [],
         url: "",
         created: "",
         edited: ""
@@ -220,7 +220,7 @@ describe('mapStarshipVmListToCardVmList tests', () => {
         const vmStarship = {
             name: "starship",
             model: "model",
-            starship_class: "",
+            starshipClass: "",
             manufacturer: "",
             costInCredits: "",
             length: "150",
@@ -233,8 +233,8 @@ describe('mapStarshipVmListToCardVmList tests', () => {
             cargoCapacityAbsoluteValue: 2000000,
             crewAbsoluteValue: 300,
             consumables: "",
-            films: "",
-            pilots: "",
+            films: [],
+            pilots: [],
             url: "",
             created: "",
             edited: ""

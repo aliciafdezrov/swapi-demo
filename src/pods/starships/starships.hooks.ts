@@ -33,7 +33,7 @@ export const useSearch = (props: Props) => {
             }
             props.onLoadStarships(vmStarships);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }, []);
 

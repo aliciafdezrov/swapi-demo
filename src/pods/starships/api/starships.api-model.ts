@@ -12,8 +12,8 @@ export interface Starship {
     MGLT: string;
     cargo_capacity: string;
     consumables: string;
-    films: string;
-    pilots: string;
+    films: string[];
+    pilots: string[];
     url: string;
     created: string;
     edited: string;

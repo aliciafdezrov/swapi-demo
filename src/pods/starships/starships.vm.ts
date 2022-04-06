@@ -1,7 +1,7 @@
 export interface Starship {
     name: string;
     model: string;
-    starship_class: string;
+    starshipClass: string;
     manufacturer: string;
     costInCredits: string;
     length: string;
@@ -14,8 +14,8 @@ export interface Starship {
     cargoCapacity: string;
     cargoCapacityAbsoluteValue: string | number;
     consumables: string;
-    films: string;
-    pilots: string;
+    films: string[];
+    pilots: string[];
     url: string;
     created: string;
     edited: string;
@@ -24,7 +24,7 @@ export interface Starship {
 export const createEmptyStarship = (): Starship => ({
     name: "",
     model: "",
-    starship_class: "",
+    starshipClass: "",
     manufacturer: "",
     costInCredits: "",
     length: "",
@@ -37,8 +37,8 @@ export const createEmptyStarship = (): Starship => ({
     cargoCapacity: "",
     cargoCapacityAbsoluteValue: "",
     consumables: "",
-    films: "",
-    pilots: "",
+    films: [],
+    pilots: [],
     url: "",
     created: "",
     edited: ""

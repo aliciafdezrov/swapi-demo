@@ -33,7 +33,7 @@ export const useSearch = (props: Props) => {
             }
             props.onLoadPlanets(vmPlanets);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }, []);
 
@@ -53,7 +53,6 @@ export const useSearchQueryParams = () => {
     const location = useLocation();
 
     const getQueryParam = React.useCallback((query: string) => {
-        console.log(location.search)
         const searchParams = new URLSearchParams(location.search);
         const queryResult = searchParams.get(query);
         if (queryResult) {

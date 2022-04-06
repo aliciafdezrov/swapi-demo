@@ -1,13 +1,13 @@
 export interface PlanetVm {
     name: string;
     diameter: string;
-    rotation_period: string;
-    orbital_period: string;
+    rotationPeriod: string;
+    orbitalPeriod: string;
     gravity: string;
     population: string;
     climate: string;
     terrain: string;
-    surface_water: string;
+    surfaceWater: string;
     residents: string[];
     films: string[];
     url: string;
@@ -18,13 +18,13 @@ export interface PlanetVm {
 export const createEmptyPlanet = (): PlanetVm => ({
     name: "",
     diameter: "",
-    rotation_period: "",
-    orbital_period: "",
+    rotationPeriod: "",
+    orbitalPeriod: "",
     gravity: "",
     population: "",
     climate: "",
     terrain: "",
-    surface_water: "",
+    surfaceWater: "",
     residents: [],
     films: [],
     url: "",
