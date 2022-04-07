@@ -5,6 +5,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {createDefaultStarshipsVm, StarshipsVm} from "./starships.vm";
 import {mapStarshipsFromApiToVm} from "./starships.mapper";
 import {switchRoutes} from "core/router";
+import {useAbort} from "common/hooks";
 
 interface Props {
     onLoadStarships: (starshipsVm: StarshipsVm) => void;
@@ -12,8 +13,10 @@ interface Props {
 
 export const useSearch = (props: Props) => {
     const navigate = useNavigate();
+    const {signal, abort} = useAbort();
 
     const debouncedSearch = debounce(async (name: string, page?: number) => {
+        abort();
         await onSearch(name, page);
     }, 500);
 
@@ -25,7 +28,7 @@ export const useSearch = (props: Props) => {
             };
 
             const encodedQuery: string = encodeURIComponent(name);
-            const apiStarships = await api.getStarships(encodedQuery, page);
+            const apiStarships = await api.getStarships(encodedQuery, page, signal());
             starshipsVm = mapStarshipsFromApiToVm(apiStarships);
             if (name || page) {
                 locationDescriptor.search = `?search=${encodedQuery}&page=${page}`;
