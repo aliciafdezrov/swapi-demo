@@ -152,11 +152,12 @@ npm run test
 Launch the interactive suite test runner for the cypress integration test:
 
 ```
-npm run start:e2e
+npm run test:e2e
 ```
 
 Launch the command runner for the cypress integration test:
 
 ```
-npm run test:e2e
+npm run test:e2e:ci
 ```
+
