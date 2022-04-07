@@ -160,4 +160,3 @@ Launch the command runner for the cypress integration test:
 ```
 npm run test:e2e:ci
 ```
-
