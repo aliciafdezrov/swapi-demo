@@ -1,17 +1,17 @@
 import React from 'react';
 import {useSearch, useSearchQueryParams} from './starships.hooks';
 import {StarshipsComponent} from "./starships.component";
-import {createDefaultStarships, Starships} from "./starships.vm";
+import {createDefaultStarshipsVm, StarshipsVm} from "./starships.vm";
 import {switchRoutes} from "core/router";
 import {useLocation} from "react-router-dom";
 
 export const StarshipsContainer: React.FC = () => {
-    const [starshipsInfo, setStarshipsInfo] = React.useState<Starships>(createDefaultStarships());
+    const [starshipsInfo, setStarshipsInfo] = React.useState<StarshipsVm>(createDefaultStarshipsVm());
     const [loading, setLoading] = React.useState<boolean>(false);
     const {getQueryParam} = useSearchQueryParams();
     const {onSearch} = useSearch({
-        onLoadStarships: (vmStarships) => {
-            setStarshipsInfo(vmStarships);
+        onLoadStarships: (starshipsVm) => {
+            setStarshipsInfo(starshipsVm);
             setLoading(false);
         },
     });
@@ -21,12 +21,12 @@ export const StarshipsContainer: React.FC = () => {
     //Initial and root route load
     React.useEffect(() => {
         if (location.pathname === switchRoutes.starships && location.search === '') {
-            let nameQuery = getQueryParam("name");
+            let searchQuery = getQueryParam("search");
             let page;
             if (getQueryParam("page")) {
                 page = Number(getQueryParam("page"));
             }
-            handleOnSearch(nameQuery, page);
+            handleOnSearch(searchQuery, page);
         }
     }, [location.key]);
 

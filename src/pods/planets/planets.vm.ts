@@ -15,7 +15,7 @@ export interface PlanetVm {
     edited: string;
 }
 
-export const createEmptyPlanet = (): PlanetVm => ({
+export const createEmptyPlanetVm = (): PlanetVm => ({
     name: "",
     diameter: "",
     rotationPeriod: "",
@@ -32,7 +32,7 @@ export const createEmptyPlanet = (): PlanetVm => ({
     edited: "",
 });
 
-export interface Planets {
+export interface PlanetsVm {
     count: number;
     planets: PlanetVm[];
     currentPage: number;
@@ -40,7 +40,7 @@ export interface Planets {
     hasPreviousPage: boolean;
 }
 
-export const createDefaultPlanets = (): Planets => ({
+export const createDefaultPlanetsVm = (): PlanetsVm => ({
     count: 0,
     currentPage: 0,
     hasNextPage: false,

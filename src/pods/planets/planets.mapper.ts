@@ -1,6 +1,6 @@
 import * as apiModel from './api/planet.api-model';
 import * as viewModel from './planets.vm';
-import {createDefaultPlanets, PlanetVm} from './planets.vm';
+import {createDefaultPlanetsVm, PlanetVm} from './planets.vm';
 import {mapToCollection} from "common/mappers";
 import {CardVm, createDefaultCardVm} from "common/components/cards/card.vm";
 
@@ -9,7 +9,7 @@ let formatter = Intl.NumberFormat('en', {notation: 'compact'});
 export const mapPlanetFromApiToVm = (
     planet: apiModel.Planet
 ): viewModel.PlanetVm => {
-    if (!planet) return viewModel.createEmptyPlanet();
+    if (!planet) return viewModel.createEmptyPlanetVm();
     return {
         name: planet.name,
         diameter: planet.diameter,
@@ -33,8 +33,8 @@ export const mapPlanetListFromApiToVm = (
 ): viewModel.PlanetVm[] =>
     mapToCollection(planets, p => mapPlanetFromApiToVm(p));
 
-export const mapPlanetsFromApiToVm = (planets: apiModel.Planets): viewModel.Planets => {
-    const planetsInfo = createDefaultPlanets();
+export const mapPlanetsFromApiToVm = (planets: apiModel.Planets): viewModel.PlanetsVm => {
+    const planetsInfo = createDefaultPlanetsVm();
     planetsInfo.planets = mapPlanetListFromApiToVm(planets.results);
     planetsInfo.count = planets.count;
     planetsInfo.hasNextPage = Boolean(planets.next);

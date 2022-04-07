@@ -2,12 +2,12 @@ import React from 'react';
 import * as api from './api';
 import {debounce} from "lodash";
 import {useLocation, useNavigate} from "react-router-dom";
-import {createDefaultPlanets, Planets} from "./planets.vm";
+import {createDefaultPlanetsVm, PlanetsVm} from "./planets.vm";
 import {mapPlanetsFromApiToVm} from "./planets.mapper";
 import {switchRoutes} from "core/router";
 
 interface Props {
-    onLoadPlanets: (vmPlanets: Planets) => void;
+    onLoadPlanets: (planetsVm: PlanetsVm) => void;
 }
 
 export const useSearch = (props: Props) => {
@@ -15,23 +15,23 @@ export const useSearch = (props: Props) => {
 
     const debouncedSearch = debounce(async (name: string, page?: number) => {
         await onSearch(name, page);
-    }, 200);
+    }, 500);
 
     const onSearch = React.useCallback(async (name: string, page?: number) => {
         try {
-            let vmPlanets: Planets = createDefaultPlanets();
+            let planetsVm: PlanetsVm = createDefaultPlanetsVm();
             let locationDescriptor: any = {
                 pathname: switchRoutes.planets,
             };
 
             const encodedQuery: string = encodeURIComponent(name);
             const apiPlanets = await api.getPlanets(encodedQuery, page);
-            vmPlanets = mapPlanetsFromApiToVm(apiPlanets);
+            planetsVm = mapPlanetsFromApiToVm(apiPlanets);
             if (name || page) {
-                locationDescriptor.search = `?name=${encodedQuery}&page=${page}`;
+                locationDescriptor.search = `?search=${encodedQuery}&page=${page}`;
                 navigate(locationDescriptor);
             }
-            props.onLoadPlanets(vmPlanets);
+            props.onLoadPlanets(planetsVm);
         } catch (error) {
             console.error(error);
         }
@@ -59,7 +59,7 @@ export const useSearchQueryParams = () => {
             return queryResult;
         }
         return '';
-    }, []);
+    }, [location]);
 
     return {
         getQueryParam,

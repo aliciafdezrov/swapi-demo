@@ -23,6 +23,13 @@ export const MainLayout: React.FC = (props) => {
         setWarningDialogOpen(!warningDialogOpen)
     }
 
+    const buildToRoute = (toPathname: string) => {
+        if (currentPathname(toPathname)) {
+            return `${toPathname}${search}`;
+        }
+        return toPathname;
+    }
+
     return (
         <>
             <div className={classes.appBarHorizontal}>
@@ -43,7 +50,8 @@ export const MainLayout: React.FC = (props) => {
                     </div>
                     <Link id={"planets-menu-item"}
                           style={currentPathname(switchRoutes.planets) ? {color: '#ffffff'} : null}
-                          className={`${classes.mainNavItem} ${classes.initialBorder}`} to={switchRoutes.planets}>
+                          className={`${classes.mainNavItem} ${classes.initialBorder}`}
+                          to={buildToRoute(switchRoutes.planets)}>
                         {matchesMinSize ?
                             <div className={classes.iconAndTitle}>
                                 <img className={classes.iconWithMargin}
@@ -60,7 +68,7 @@ export const MainLayout: React.FC = (props) => {
                     <Link id={"starships-menu-item"}
                           style={currentPathname(switchRoutes.starships) ? {color: '#ffffff'} : null}
                           className={classes.mainNavItem}
-                          to={switchRoutes.starships}>
+                          to={buildToRoute(switchRoutes.starships)}>
                         {matchesMinSize ?
                             <div className={classes.iconAndTitle}>
                                 <img className={classes.iconWithMargin}

@@ -23,8 +23,8 @@ const castStringifyNumber = (str: string): number | string => {
 
 export const mapStarshipFromApiToVm = (
     starship: apiModel.Starship
-): viewModel.Starship => {
-    if (!starship) return viewModel.createEmptyStarship();
+): viewModel.StarshipVm => {
+    if (!starship) return viewModel.createEmptyStarshipVm();
     return {
         starshipClass: starship.starship_class,
         name: starship.name,
@@ -51,11 +51,11 @@ export const mapStarshipFromApiToVm = (
 
 export const mapStarshipListFromApiToVm = (
     starships: apiModel.Starship[]
-): viewModel.Starship[] =>
+): viewModel.StarshipVm[] =>
     mapToCollection(starships, p => mapStarshipFromApiToVm(p));
 
-export const mapStarshipsFromApiToVm = (starships: apiModel.Starships): viewModel.Starships => {
-    const starshipsInfo = viewModel.createDefaultStarships();
+export const mapStarshipsFromApiToVm = (starships: apiModel.Starships): viewModel.StarshipsVm => {
+    const starshipsInfo = viewModel.createDefaultStarshipsVm();
     starshipsInfo.starships = mapStarshipListFromApiToVm(starships.results);
     starshipsInfo.count = starships.count;
     starshipsInfo.hasNextPage = Boolean(starships.next);
@@ -71,7 +71,7 @@ export const mapStarshipsFromApiToVm = (starships: apiModel.Starships): viewMode
     return starshipsInfo;
 }
 
-export const mapStarshipVmToCardVm = (starship: viewModel.Starship): CardVm => {
+export const mapStarshipVmToCardVm = (starship: viewModel.StarshipVm): CardVm => {
     let cardVm = createDefaultCardVm();
     cardVm.mainLabel = starship.name;
     cardVm.secondaryLabel = isNaN(Number(starship.cargoCapacityAbsoluteValue)) ? 'Unknown' : formatter.format(Number(starship.cargoCapacityAbsoluteValue));
@@ -88,5 +88,5 @@ export const mapStarshipVmToCardVm = (starship: viewModel.Starship): CardVm => {
     return cardVm;
 }
 
-export const mapStarshipVmListToCardVmList = (starships: viewModel.Starship[]): CardVm[] =>
+export const mapStarshipVmListToCardVmList = (starships: viewModel.StarshipVm[]): CardVm[] =>
     mapToCollection(starships, p => mapStarshipVmToCardVm(p));

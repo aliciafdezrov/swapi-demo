@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import classes from './planets.style.scss';
-import {Planets, PlanetVm} from "./planets.vm";
+import {PlanetsVm, PlanetVm} from "./planets.vm";
 import {mapPlanetVmListToCardVmList} from "./planets.mapper";
 import {Pagination} from "../../common/components/pagination/pagination.component";
 import {CardArray, CircularSpinner, SearchBar} from "common/components";
@@ -9,7 +9,7 @@ import {empty_option, SelectItem} from "../../common/components/search-bar/selec
 import {NoItems} from "../../common/components/no-items/no-items.component";
 
 interface Props {
-    planetsInfo: Planets;
+    planetsInfo: PlanetsVm;
     search: string;
     onSearch: (name: string, page?: number) => void;
     loading: boolean;

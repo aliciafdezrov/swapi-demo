@@ -1,4 +1,4 @@
-export interface Starship {
+export interface StarshipVm {
     name: string;
     model: string;
     starshipClass: string;
@@ -21,7 +21,7 @@ export interface Starship {
     edited: string;
 }
 
-export const createEmptyStarship = (): Starship => ({
+export const createEmptyStarshipVm = (): StarshipVm => ({
     name: "",
     model: "",
     starshipClass: "",
@@ -44,15 +44,15 @@ export const createEmptyStarship = (): Starship => ({
     edited: ""
 });
 
-export interface Starships {
+export interface StarshipsVm {
     count: number;
-    starships: Starship[];
+    starships: StarshipVm[];
     currentPage: number;
     hasNextPage: boolean;
     hasPreviousPage: boolean;
 }
 
-export const createDefaultStarships = (): Starships => ({
+export const createDefaultStarshipsVm = (): StarshipsVm => ({
     count: 0,
     currentPage: 0,
     hasNextPage: false,

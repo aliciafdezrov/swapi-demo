@@ -10,7 +10,7 @@ import {
 describe('mapPlanetFromApiToVm tests', () => {
     it('should return an empty PlanetVm when null data', () => {
         const result = mapPlanetFromApiToVm(null);
-        expect(result).toEqual(viewModel.createEmptyPlanet());
+        expect(result).toEqual(viewModel.createEmptyPlanetVm());
     });
 
     it('should return planet passed as param as view model planet', () => {
@@ -31,7 +31,7 @@ describe('mapPlanetFromApiToVm tests', () => {
             edited: ""
         };
 
-        const vmPlanet = {
+        const planetVm = {
             name: "planet",
             diameter: "200",
             rotationPeriod: "",
@@ -48,7 +48,7 @@ describe('mapPlanetFromApiToVm tests', () => {
             edited: ""
         }
         const result = mapPlanetFromApiToVm(apiPlanet);
-        expect(result).toEqual(vmPlanet);
+        expect(result).toEqual(planetVm);
     });
 });
 
@@ -74,7 +74,7 @@ describe('mapPlanetListFromApiToVm tests', () => {
             created: "",
             edited: ""
         };
-        const vmPlanet = {
+        const planetVm = {
             name: "planet",
             diameter: "200",
             rotationPeriod: "",
@@ -92,9 +92,9 @@ describe('mapPlanetListFromApiToVm tests', () => {
         };
         const result = mapPlanetListFromApiToVm([apiPlanet, apiPlanet, apiPlanet]);
         expect(result.length).toBe(3);
-        expect(result[0]).toEqual(vmPlanet);
-        expect(result[1]).toEqual(vmPlanet);
-        expect(result[2]).toEqual(vmPlanet);
+        expect(result[0]).toEqual(planetVm);
+        expect(result[1]).toEqual(planetVm);
+        expect(result[2]).toEqual(planetVm);
     });
 });
 

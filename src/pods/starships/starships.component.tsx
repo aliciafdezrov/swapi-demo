@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import classes from './starships.style.scss';
-import {Starship, Starships} from "./starships.vm";
+import {StarshipVm, StarshipsVm} from "./starships.vm";
 import {CardArray, CircularSpinner, SearchBar} from "common/components";
 import {sortDTOListByProp} from "common/utils";
 import {mapStarshipVmListToCardVmList} from "./starships.mapper";
@@ -9,7 +9,7 @@ import {empty_option, SelectItem} from "../../common/components/search-bar/selec
 import {NoItems} from "../../common/components/no-items/no-items.component";
 
 interface Props {
-    starshipsInfo: Starships;
+    starshipsInfo: StarshipsVm;
     search: string;
     onSearch: (name: string, page?: number) => void;
     loading: boolean;
@@ -52,7 +52,7 @@ export const StarshipsComponent = (props: Props) => {
         return `${startIndex} to ${endIndex} of ${starshipsInfo.count} starships`;
     }
 
-    const sortFunction = useCallback((starships: Starship[]): Starship[] => {
+    const sortFunction = useCallback((starships: StarshipVm[]): StarshipVm[] => {
         if (!sortBy) return starships;
         const definedStarships = starships.filter(s => !isNaN(s[sortBy]));
         const nonDefinedStarchips = starships.filter(s => isNaN(s[sortBy]));
@@ -63,7 +63,7 @@ export const StarshipsComponent = (props: Props) => {
 
         return [...sortedStarships, ...nonDefinedStarchips];
     }, [sortBy, isSortAscending]);
-    const sortedStarships: Starship[] = sortFunction(starshipsInfo.starships);
+    const sortedStarships: StarshipVm[] = sortFunction(starshipsInfo.starships);
 
     return (
         <>

@@ -10,7 +10,7 @@ import {
 describe('mapStarshipFromApiToVm tests', () => {
     it('should return an empty StarshipVm when sending null data', () => {
         const result = mapStarshipFromApiToVm(null);
-        expect(result).toEqual(viewModel.createEmptyStarship());
+        expect(result).toEqual(viewModel.createEmptyStarshipVm());
     });
 
     it('should return starship passed as param as view model starship', () => {
@@ -34,7 +34,7 @@ describe('mapStarshipFromApiToVm tests', () => {
             created: "",
             edited: ""
         };
-        const result: viewModel.Starship = mapStarshipFromApiToVm(starship);
+        const result: viewModel.StarshipVm = mapStarshipFromApiToVm(starship);
         expect(result).toEqual({
             name: "starship",
             model: "model",
@@ -82,7 +82,7 @@ describe('mapStarshipListFromApiToVm tests', () => {
         edited: ""
     };
 
-    const vmStarship = {
+    const starshipVm = {
         name: "starship",
         model: "model",
         starshipClass: "",
@@ -113,9 +113,9 @@ describe('mapStarshipListFromApiToVm tests', () => {
     it('should return starship list passed as param as view model starship', () => {
         const result = mapStarshipListFromApiToVm([apiStarship, apiStarship, apiStarship]);
         expect(result.length).toBe(3);
-        expect(result[0]).toEqual(vmStarship);
-        expect(result[1]).toEqual(vmStarship);
-        expect(result[2]).toEqual(vmStarship);
+        expect(result[0]).toEqual(starshipVm);
+        expect(result[1]).toEqual(starshipVm);
+        expect(result[2]).toEqual(starshipVm);
     });
 });
 
@@ -156,7 +156,7 @@ describe('mapStarshipsFromApiToVm tests', () => {
 });
 
 describe('mapStarshipVmToCardVm tests', () => {
-    const vmStarship = {
+    const starshipVm = {
         name: "starship",
         model: "model",
         starshipClass: "",
@@ -180,8 +180,8 @@ describe('mapStarshipVmToCardVm tests', () => {
     };
 
     it('should map starship info to card info', () => {
-        const result = mapStarshipVmToCardVm(vmStarship);
-        expect(result.mainLabel).toEqual(vmStarship.name);
+        const result = mapStarshipVmToCardVm(starshipVm);
+        expect(result.mainLabel).toEqual(starshipVm.name);
         expect(result.secondaryLabel).toEqual("2M");
         expect(result.secondaryLabelHelperText).toEqual("Cargo capacity:");
         expect(result.detailLabelHelperText).toEqual("Max crew of");
@@ -189,8 +189,8 @@ describe('mapStarshipVmToCardVm tests', () => {
     });
 
     it('should return crew of unknown when crew is NaN', () => {
-        const result = mapStarshipVmToCardVm({...vmStarship, crewAbsoluteValue: "Unknown"});
-        expect(result.mainLabel).toEqual(vmStarship.name);
+        const result = mapStarshipVmToCardVm({...starshipVm, crewAbsoluteValue: "Unknown"});
+        expect(result.mainLabel).toEqual(starshipVm.name);
         expect(result.secondaryLabel).toEqual("2M");
         expect(result.secondaryLabelHelperText).toEqual("Cargo capacity:");
         expect(result.detailLabelHelperText).toEqual("Max crew of");
@@ -199,10 +199,10 @@ describe('mapStarshipVmToCardVm tests', () => {
 
     it('should return cargo capacity of unknown when population is NaN', () => {
         const result = mapStarshipVmToCardVm({
-            ...vmStarship,
+            ...starshipVm,
             cargoCapacityAbsoluteValue: "Unknown"
         });
-        expect(result.mainLabel).toEqual(vmStarship.name);
+        expect(result.mainLabel).toEqual(starshipVm.name);
         expect(result.secondaryLabel).toEqual("Unknown");
         expect(result.secondaryLabelHelperText).toEqual("Cargo capacity:");
         expect(result.detailLabelHelperText).toEqual("Max crew of");
@@ -217,7 +217,7 @@ describe('mapStarshipVmListToCardVmList tests', () => {
     });
 
     it('should return starship list passed as param as card view model', () => {
-        const vmStarship = {
+        const starshipVm = {
             name: "starship",
             model: "model",
             starshipClass: "",
@@ -239,7 +239,7 @@ describe('mapStarshipVmListToCardVmList tests', () => {
             created: "",
             edited: ""
         };
-        const result = mapStarshipVmListToCardVmList([vmStarship, vmStarship, vmStarship]);
+        const result = mapStarshipVmListToCardVmList([starshipVm, starshipVm, starshipVm]);
         expect(result.length).toBe(3);
     });
 });
